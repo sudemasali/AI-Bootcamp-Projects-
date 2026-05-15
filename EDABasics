@@ -1,0 +1,3533 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "generative_ai_disabled": true,
+      "authorship_tag": "ABX9TyMY9zTObbyR3NKWrIIv8Z7q",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/sudemasali/AI-Bootcamp-Projects-/blob/main/EDABasics\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 3,
+      "metadata": {
+        "id": "1YQcqrL-WgoD"
+      },
+      "outputs": [],
+      "source": [
+        "import pandas as pd"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# 1. 1.\tVeri setini yükleyin ve ilk 10 satırı ile son 10 satırını ekrana yazdırın.\n",
+        "df = pd.read_csv(\"e_ticaret_veri_seti.csv\")\n",
+        "df.head(10)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 556
+        },
+        "id": "RTr-gyBRW8lC",
+        "outputId": "13eee0a2-cf68-4bfc-e3e0-84d21326d31b"
+      },
+      "execution_count": 4,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "  siparis_id musteri_id       siparis_tarihi      sehir              bolge  \\\n",
+              "0  SIP101125    MUS1391  2024-01-13 17:06:00   İstanbul            Marmara   \n",
+              "1  SIP100837    MUS1347  2025-03-17 21:13:00  Gaziantep  Güneydoğu Anadolu   \n",
+              "2  SIP100050    MUS1066  2025-06-03 12:42:00    Kayseri         İç Anadolu   \n",
+              "3  SIP100263    MUS1008  2024-08-10 15:13:00    Antalya            Akdeniz   \n",
+              "4  SIP100707    MUS1291  2024-08-19 08:24:00  Gaziantep  Güneydoğu Anadolu   \n",
+              "5  SIP100687    MUS1147  2025-08-09 08:42:00      Konya         İç Anadolu   \n",
+              "6  SIP101351    MUS1011  2025-02-27 11:35:00   İstanbul            Marmara   \n",
+              "7  SIP101172    MUS1357  2024-07-22 13:26:00     Ankara         İç Anadolu   \n",
+              "8  SIP100779    MUS1354  2025-12-05 11:19:00   İstanbul            Marmara   \n",
+              "9  SIP100202    MUS1067  2024-05-11 22:53:00      Bursa            Marmara   \n",
+              "\n",
+              "     kategori              urun_adi  adet  birim_fiyat  indirim_orani  \\\n",
+              "0    Kozmetik          Nemlendirici     1       414.51           0.05   \n",
+              "1        Spor           Dambıl Seti     2      1475.15           0.10   \n",
+              "2       Kitap  İş Analitiği Rehberi     1       289.02           0.05   \n",
+              "3       Kitap          Girişimcilik     5       194.78           0.00   \n",
+              "4  Elektronik             Powerbank     3       841.80           0.05   \n",
+              "5    Kozmetik          Nemlendirici     2       417.02           0.00   \n",
+              "6        Ofis             Mouse Pad     3       169.47           0.05   \n",
+              "7        Ofis        Mekanik Klavye     3      2344.47           0.00   \n",
+              "8       Kitap        Python Notları     4       219.14           0.00   \n",
+              "9    Kozmetik           Güneş Kremi     2       424.40           0.00   \n",
+              "\n",
+              "   kargo_ucreti      odeme_turu musteri_tipi  teslimat_gunu  musteri_puani  \\\n",
+              "0          49.9     Kredi Kartı         Yeni            3.0            5.0   \n",
+              "1          29.9     Banka Kartı          VIP            4.0            1.0   \n",
+              "2          29.9     Kredi Kartı       Mevcut            6.0            2.0   \n",
+              "3          49.9    Kapıda Ödeme         Yeni            3.0            5.0   \n",
+              "4          39.9  Dijital Cüzdan       Mevcut            4.0            5.0   \n",
+              "5          59.9  Dijital Cüzdan       Mevcut            4.0            5.0   \n",
+              "6          29.9      Havale/EFT          VIP            3.0            2.0   \n",
+              "7          59.9     Kredi Kartı       Mevcut            3.0            4.0   \n",
+              "8          29.9     Kredi Kartı         Yeni           18.0            5.0   \n",
+              "9          29.9      Havale/EFT       Mevcut            3.0            1.0   \n",
+              "\n",
+              "  iade_durumu  kar_marji_orani  toplam_tutar  \n",
+              "0       Hayır            0.220        443.68  \n",
+              "1       Hayır            0.361       2685.17  \n",
+              "2       Hayır            0.348        304.47  \n",
+              "3       Hayır            0.250       1023.80  \n",
+              "4       Hayır            0.280       2439.03  \n",
+              "5       Hayır            0.220        893.94  \n",
+              "6        Evet            0.382        512.89  \n",
+              "7       Hayır            0.312       7093.31  \n",
+              "8        Evet            0.408        906.46  \n",
+              "9       Hayır            0.212        878.70  "
+            ],
+            "text/html": [
+              "\n",
+              "  <div id=\"df-c08957b4-dc6d-4915-8e6f-54dc2bea62fd\" class=\"colab-df-container\">\n",
+              "    <div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>siparis_id</th>\n",
+              "      <th>musteri_id</th>\n",
+              "      <th>siparis_tarihi</th>\n",
+              "      <th>sehir</th>\n",
+              "      <th>bolge</th>\n",
+              "      <th>kategori</th>\n",
+              "      <th>urun_adi</th>\n",
+              "      <th>adet</th>\n",
+              "      <th>birim_fiyat</th>\n",
+              "      <th>indirim_orani</th>\n",
+              "      <th>kargo_ucreti</th>\n",
+              "      <th>odeme_turu</th>\n",
+              "      <th>musteri_tipi</th>\n",
+              "      <th>teslimat_gunu</th>\n",
+              "      <th>musteri_puani</th>\n",
+              "      <th>iade_durumu</th>\n",
+              "      <th>kar_marji_orani</th>\n",
+              "      <th>toplam_tutar</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>SIP101125</td>\n",
+              "      <td>MUS1391</td>\n",
+              "      <td>2024-01-13 17:06:00</td>\n",
+              "      <td>İstanbul</td>\n",
+              "      <td>Marmara</td>\n",
+              "      <td>Kozmetik</td>\n",
+              "      <td>Nemlendirici</td>\n",
+              "      <td>1</td>\n",
+              "      <td>414.51</td>\n",
+              "      <td>0.05</td>\n",
+              "      <td>49.9</td>\n",
+              "      <td>Kredi Kartı</td>\n",
+              "      <td>Yeni</td>\n",
+              "      <td>3.0</td>\n",
+              "      <td>5.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.220</td>\n",
+              "      <td>443.68</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>SIP100837</td>\n",
+              "      <td>MUS1347</td>\n",
+              "      <td>2025-03-17 21:13:00</td>\n",
+              "      <td>Gaziantep</td>\n",
+              "      <td>Güneydoğu Anadolu</td>\n",
+              "      <td>Spor</td>\n",
+              "      <td>Dambıl Seti</td>\n",
+              "      <td>2</td>\n",
+              "      <td>1475.15</td>\n",
+              "      <td>0.10</td>\n",
+              "      <td>29.9</td>\n",
+              "      <td>Banka Kartı</td>\n",
+              "      <td>VIP</td>\n",
+              "      <td>4.0</td>\n",
+              "      <td>1.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.361</td>\n",
+              "      <td>2685.17</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>SIP100050</td>\n",
+              "      <td>MUS1066</td>\n",
+              "      <td>2025-06-03 12:42:00</td>\n",
+              "      <td>Kayseri</td>\n",
+              "      <td>İç Anadolu</td>\n",
+              "      <td>Kitap</td>\n",
+              "      <td>İş Analitiği Rehberi</td>\n",
+              "      <td>1</td>\n",
+              "      <td>289.02</td>\n",
+              "      <td>0.05</td>\n",
+              "      <td>29.9</td>\n",
+              "      <td>Kredi Kartı</td>\n",
+              "      <td>Mevcut</td>\n",
+              "      <td>6.0</td>\n",
+              "      <td>2.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.348</td>\n",
+              "      <td>304.47</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>SIP100263</td>\n",
+              "      <td>MUS1008</td>\n",
+              "      <td>2024-08-10 15:13:00</td>\n",
+              "      <td>Antalya</td>\n",
+              "      <td>Akdeniz</td>\n",
+              "      <td>Kitap</td>\n",
+              "      <td>Girişimcilik</td>\n",
+              "      <td>5</td>\n",
+              "      <td>194.78</td>\n",
+              "      <td>0.00</td>\n",
+              "      <td>49.9</td>\n",
+              "      <td>Kapıda Ödeme</td>\n",
+              "      <td>Yeni</td>\n",
+              "      <td>3.0</td>\n",
+              "      <td>5.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.250</td>\n",
+              "      <td>1023.80</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>4</th>\n",
+              "      <td>SIP100707</td>\n",
+              "      <td>MUS1291</td>\n",
+              "      <td>2024-08-19 08:24:00</td>\n",
+              "      <td>Gaziantep</td>\n",
+              "      <td>Güneydoğu Anadolu</td>\n",
+              "      <td>Elektronik</td>\n",
+              "      <td>Powerbank</td>\n",
+              "      <td>3</td>\n",
+              "      <td>841.80</td>\n",
+              "      <td>0.05</td>\n",
+              "      <td>39.9</td>\n",
+              "      <td>Dijital Cüzdan</td>\n",
+              "      <td>Mevcut</td>\n",
+              "      <td>4.0</td>\n",
+              "      <td>5.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.280</td>\n",
+              "      <td>2439.03</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>5</th>\n",
+              "      <td>SIP100687</td>\n",
+              "      <td>MUS1147</td>\n",
+              "      <td>2025-08-09 08:42:00</td>\n",
+              "      <td>Konya</td>\n",
+              "      <td>İç Anadolu</td>\n",
+              "      <td>Kozmetik</td>\n",
+              "      <td>Nemlendirici</td>\n",
+              "      <td>2</td>\n",
+              "      <td>417.02</td>\n",
+              "      <td>0.00</td>\n",
+              "      <td>59.9</td>\n",
+              "      <td>Dijital Cüzdan</td>\n",
+              "      <td>Mevcut</td>\n",
+              "      <td>4.0</td>\n",
+              "      <td>5.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.220</td>\n",
+              "      <td>893.94</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>6</th>\n",
+              "      <td>SIP101351</td>\n",
+              "      <td>MUS1011</td>\n",
+              "      <td>2025-02-27 11:35:00</td>\n",
+              "      <td>İstanbul</td>\n",
+              "      <td>Marmara</td>\n",
+              "      <td>Ofis</td>\n",
+              "      <td>Mouse Pad</td>\n",
+              "      <td>3</td>\n",
+              "      <td>169.47</td>\n",
+              "      <td>0.05</td>\n",
+              "      <td>29.9</td>\n",
+              "      <td>Havale/EFT</td>\n",
+              "      <td>VIP</td>\n",
+              "      <td>3.0</td>\n",
+              "      <td>2.0</td>\n",
+              "      <td>Evet</td>\n",
+              "      <td>0.382</td>\n",
+              "      <td>512.89</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>7</th>\n",
+              "      <td>SIP101172</td>\n",
+              "      <td>MUS1357</td>\n",
+              "      <td>2024-07-22 13:26:00</td>\n",
+              "      <td>Ankara</td>\n",
+              "      <td>İç Anadolu</td>\n",
+              "      <td>Ofis</td>\n",
+              "      <td>Mekanik Klavye</td>\n",
+              "      <td>3</td>\n",
+              "      <td>2344.47</td>\n",
+              "      <td>0.00</td>\n",
+              "      <td>59.9</td>\n",
+              "      <td>Kredi Kartı</td>\n",
+              "      <td>Mevcut</td>\n",
+              "      <td>3.0</td>\n",
+              "      <td>4.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.312</td>\n",
+              "      <td>7093.31</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>8</th>\n",
+              "      <td>SIP100779</td>\n",
+              "      <td>MUS1354</td>\n",
+              "      <td>2025-12-05 11:19:00</td>\n",
+              "      <td>İstanbul</td>\n",
+              "      <td>Marmara</td>\n",
+              "      <td>Kitap</td>\n",
+              "      <td>Python Notları</td>\n",
+              "      <td>4</td>\n",
+              "      <td>219.14</td>\n",
+              "      <td>0.00</td>\n",
+              "      <td>29.9</td>\n",
+              "      <td>Kredi Kartı</td>\n",
+              "      <td>Yeni</td>\n",
+              "      <td>18.0</td>\n",
+              "      <td>5.0</td>\n",
+              "      <td>Evet</td>\n",
+              "      <td>0.408</td>\n",
+              "      <td>906.46</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>9</th>\n",
+              "      <td>SIP100202</td>\n",
+              "      <td>MUS1067</td>\n",
+              "      <td>2024-05-11 22:53:00</td>\n",
+              "      <td>Bursa</td>\n",
+              "      <td>Marmara</td>\n",
+              "      <td>Kozmetik</td>\n",
+              "      <td>Güneş Kremi</td>\n",
+              "      <td>2</td>\n",
+              "      <td>424.40</td>\n",
+              "      <td>0.00</td>\n",
+              "      <td>29.9</td>\n",
+              "      <td>Havale/EFT</td>\n",
+              "      <td>Mevcut</td>\n",
+              "      <td>3.0</td>\n",
+              "      <td>1.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.212</td>\n",
+              "      <td>878.70</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>\n",
+              "    <div class=\"colab-df-buttons\">\n",
+              "\n",
+              "  <div class=\"colab-df-container\">\n",
+              "    <button class=\"colab-df-convert\" onclick=\"convertToInteractive('df-c08957b4-dc6d-4915-8e6f-54dc2bea62fd')\"\n",
+              "            title=\"Convert this dataframe to an interactive table.\"\n",
+              "            style=\"display:none;\">\n",
+              "\n",
+              "  <svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\" viewBox=\"0 -960 960 960\">\n",
+              "    <path d=\"M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z\"/>\n",
+              "  </svg>\n",
+              "    </button>\n",
+              "\n",
+              "  <style>\n",
+              "    .colab-df-container {\n",
+              "      display:flex;\n",
+              "      gap: 12px;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-convert {\n",
+              "      background-color: #E8F0FE;\n",
+              "      border: none;\n",
+              "      border-radius: 50%;\n",
+              "      cursor: pointer;\n",
+              "      display: none;\n",
+              "      fill: #1967D2;\n",
+              "      height: 32px;\n",
+              "      padding: 0 0 0 0;\n",
+              "      width: 32px;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-convert:hover {\n",
+              "      background-color: #E2EBFA;\n",
+              "      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n",
+              "      fill: #174EA6;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-buttons div {\n",
+              "      margin-bottom: 4px;\n",
+              "    }\n",
+              "\n",
+              "    [theme=dark] .colab-df-convert {\n",
+              "      background-color: #3B4455;\n",
+              "      fill: #D2E3FC;\n",
+              "    }\n",
+              "\n",
+              "    [theme=dark] .colab-df-convert:hover {\n",
+              "      background-color: #434B5C;\n",
+              "      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n",
+              "      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n",
+              "      fill: #FFFFFF;\n",
+              "    }\n",
+              "  </style>\n",
+              "\n",
+              "    <script>\n",
+              "      const buttonEl =\n",
+              "        document.querySelector('#df-c08957b4-dc6d-4915-8e6f-54dc2bea62fd button.colab-df-convert');\n",
+              "      buttonEl.style.display =\n",
+              "        google.colab.kernel.accessAllowed ? 'block' : 'none';\n",
+              "\n",
+              "      async function convertToInteractive(key) {\n",
+              "        const element = document.querySelector('#df-c08957b4-dc6d-4915-8e6f-54dc2bea62fd');\n",
+              "        const dataTable =\n",
+              "          await google.colab.kernel.invokeFunction('convertToInteractive',\n",
+              "                                                    [key], {});\n",
+              "        if (!dataTable) return;\n",
+              "\n",
+              "        const docLinkHtml = 'Like what you see? Visit the ' +\n",
+              "          '<a target=\"_blank\" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'\n",
+              "          + ' to learn more about interactive tables.';\n",
+              "        element.innerHTML = '';\n",
+              "        dataTable['output_type'] = 'display_data';\n",
+              "        await google.colab.output.renderOutput(dataTable, element);\n",
+              "        const docLink = document.createElement('div');\n",
+              "        docLink.innerHTML = docLinkHtml;\n",
+              "        element.appendChild(docLink);\n",
+              "      }\n",
+              "    </script>\n",
+              "  </div>\n",
+              "\n",
+              "\n",
+              "    </div>\n",
+              "  </div>\n"
+            ],
+            "application/vnd.google.colaboratory.intrinsic+json": {
+              "type": "dataframe",
+              "variable_name": "df",
+              "summary": "{\n  \"name\": \"df\",\n  \"rows\": 1428,\n  \"fields\": [\n    {\n      \"column\": \"siparis_id\",\n      \"properties\": {\n        \"dtype\": \"string\",\n        \"num_unique_values\": 1400,\n        \"samples\": [\n          \"SIP101213\",\n          \"SIP100289\",\n          \"SIP101313\"\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"musteri_id\",\n      \"properties\": {\n        \"dtype\": \"category\",\n        \"num_unique_values\": 422,\n        \"samples\": [\n          \"MUS1162\",\n          \"MUS1278\",\n          \"MUS1268\"\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"siparis_tarihi\",\n      \"properties\": {\n        \"dtype\": \"object\",\n        \"num_unique_values\": 1398,\n        \"samples\": [\n          \"2025-05-23 22:05:00\",\n          \"2025-10-02 20:07:00\",\n          \"2024-06-04 09:47:00\"\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"sehir\",\n      \"properties\": {\n        \"dtype\": \"category\",\n        \"num_unique_values\": 19,\n        \"samples\": [\n          \"\\u0130stanbul\",\n          \"Ankara\",\n          \"\\u0130zmir\"\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"bolge\",\n      \"properties\": {\n        \"dtype\": \"category\",\n        \"num_unique_values\": 6,\n        \"samples\": [\n          \"Marmara\",\n          \"G\\u00fcneydo\\u011fu Anadolu\",\n          \"Ege\"\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"kategori\",\n      \"properties\": {\n        \"dtype\": \"category\",\n        \"num_unique_values\": 15,\n        \"samples\": [\n          \"kozmet\\u0131k\",\n          \"kitap\",\n          \"Kozmetik\"\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"urun_adi\",\n      \"properties\": {\n        \"dtype\": \"category\",\n        \"num_unique_values\": 30,\n        \"samples\": [\n          \"Kahve Kupas\\u0131\",\n          \"Kablosuz Kulakl\\u0131k\",\n          \"Webcam\"\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"adet\",\n      \"properties\": {\n        \"dtype\": \"number\",\n        \"std\": 2,\n        \"min\": 1,\n        \"max\": 38,\n        \"num_unique_values\": 10,\n        \"samples\": [\n          27,\n          2,\n          23\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"birim_fiyat\",\n      \"properties\": {\n        \"dtype\": \"number\",\n        \"std\": 1042.4146385578906,\n        \"min\": 93.11,\n        \"max\": 18145.23,\n        \"num_unique_values\": 1381,\n        \"samples\": [\n          2756.88,\n          94.39,\n          244.58\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"indirim_orani\",\n      \"properties\": {\n        \"dtype\": \"number\",\n        \"std\": 0.060114725595438616,\n        \"min\": 0.0,\n        \"max\": 0.2,\n        \"num_unique_values\": 5,\n        \"samples\": [\n          0.1,\n          0.15,\n          0.0\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"kargo_ucreti\",\n      \"properties\": {\n        \"dtype\": \"number\",\n        \"std\": 14.185016510146367,\n        \"min\": 0.0,\n        \"max\": 59.9,\n        \"num_unique_values\": 5,\n        \"samples\": [\n          29.9,\n          0.0,\n          39.9\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"odeme_turu\",\n      \"properties\": {\n        \"dtype\": \"category\",\n        \"num_unique_values\": 12,\n        \"samples\": [\n          \"Kapida Odeme\",\n          \"banka karti\",\n          \"Kredi Kart\\u0131\"\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"musteri_tipi\",\n      \"properties\": {\n        \"dtype\": \"category\",\n        \"num_unique_values\": 7,\n        \"samples\": [\n          \"Yeni\",\n          \"VIP\",\n          \"mevcut\"\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"teslimat_gunu\",\n      \"properties\": {\n        \"dtype\": \"number\",\n        \"std\": 1.8259896580730495,\n        \"min\": 1.0,\n        \"max\": 31.0,\n        \"num_unique_values\": 11,\n        \"samples\": [\n          1.0,\n          3.0,\n          31.0\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"musteri_puani\",\n      \"properties\": {\n        \"dtype\": \"number\",\n        \"std\": 1.096707305907535,\n        \"min\": 0.0,\n        \"max\": 7.0,\n        \"num_unique_values\": 8,\n        \"samples\": [\n          1.0,\n          0.0,\n          5.0\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"iade_durumu\",\n      \"properties\": {\n        \"dtype\": \"category\",\n        \"num_unique_values\": 2,\n        \"samples\": [\n          \"Evet\",\n          \"Hay\\u0131r\"\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"kar_marji_orani\",\n      \"properties\": {\n        \"dtype\": \"number\",\n        \"std\": 0.0697951618962644,\n        \"min\": 0.18,\n        \"max\": 0.42,\n        \"num_unique_values\": 241,\n        \"samples\": [\n          0.203,\n          0.312\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"toplam_tutar\",\n      \"properties\": {\n        \"dtype\": \"number\",\n        \"std\": 2961.6894995639504,\n        \"min\": 89.68,\n        \"max\": 63870.2,\n        \"num_unique_values\": 1397,\n        \"samples\": [\n          632.56,\n          1176.14\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    }\n  ]\n}"
+            }
+          },
+          "metadata": {},
+          "execution_count": 4
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df.tail(10)"
+      ],
+      "metadata": {
+        "id": "cCoNLeaLXWbJ",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 556
+        },
+        "outputId": "26eb228d-1693-4d9e-fb02-350243845188"
+      },
+      "execution_count": 5,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "     siparis_id musteri_id       siparis_tarihi      sehir              bolge  \\\n",
+              "1418  SIP100056    MUS1238  2024-04-19 20:27:00     Ankara         İç Anadolu   \n",
+              "1419  SIP101279    MUS1149  2024-08-24 08:38:00     Ankara         İç Anadolu   \n",
+              "1420  SIP100920    MUS1425  2025-07-04 14:58:00      İzmir                Ege   \n",
+              "1421  SIP100480    MUS1323  2024-06-20 20:34:00     Ankara         İç Anadolu   \n",
+              "1422  SIP101222    MUS1440  2025-05-14 09:21:00      Bursa            Marmara   \n",
+              "1423  SIP101093    MUS1187  2024-06-08 20:42:00   İstanbul            Marmara   \n",
+              "1424  SIP101193    MUS1297  2025-11-06 08:17:00  Gaziantep  Güneydoğu Anadolu   \n",
+              "1425  SIP101210    MUS1122  2025-03-07 09:07:00        NaN            Marmara   \n",
+              "1426  SIP101060    MUS1189  2025-04-19 21:52:00    Kocaeli            Marmara   \n",
+              "1427  SIP100642    MUS1289  2024-09-22 16:36:00     Ankara         İç Anadolu   \n",
+              "\n",
+              "         kategori           urun_adi  adet  birim_fiyat  indirim_orani  \\\n",
+              "1418        Kitap    Veri Bilimi 101     2       255.70           0.05   \n",
+              "1419   Elektronik        Akıllı Saat     4      3074.80           0.15   \n",
+              "1420  Ev ve Yaşam       Masa Lambası     2       699.19           0.00   \n",
+              "1421   Elektronik  Kablosuz Kulaklık     1      1468.25           0.05   \n",
+              "1422         Spor        Dambıl Seti     1      1488.18           0.00   \n",
+              "1423         Spor          Yoga Matı     1       772.23           0.00   \n",
+              "1424         Spor              Suluk     2       187.03           0.00   \n",
+              "1425   Elektronik             Webcam     4       894.47           0.10   \n",
+              "1426        Kitap    Veri Bilimi 101     2       248.55           0.05   \n",
+              "1427     Kozmetik        Güneş Kremi     1       424.84           0.20   \n",
+              "\n",
+              "      kargo_ucreti      odeme_turu musteri_tipi  teslimat_gunu  musteri_puani  \\\n",
+              "1418          59.9     Kredi Kartı       Mevcut            3.0            2.0   \n",
+              "1419          39.9     Banka Kartı         Yeni            4.0            5.0   \n",
+              "1420          49.9     Banka Kartı         Yeni            2.0            4.0   \n",
+              "1421          39.9     Banka Kartı       Mevcut            2.0            4.0   \n",
+              "1422          29.9     Kredi Kartı       Mevcut            3.0            4.0   \n",
+              "1423          29.9     Kredi Kartı       Mevcut            3.0            2.0   \n",
+              "1424          59.9     Kredi Kartı         Yeni            2.0            4.0   \n",
+              "1425          49.9     Kredi Kartı       Mevcut            3.0            5.0   \n",
+              "1426          59.9     banka karti         Yeni            4.0            3.0   \n",
+              "1427           0.0  Dijital Cüzdan         Yeni            2.0            4.0   \n",
+              "\n",
+              "     iade_durumu  kar_marji_orani  toplam_tutar  \n",
+              "1418       Hayır            0.247        545.73  \n",
+              "1419       Hayır            0.414      10494.22  \n",
+              "1420       Hayır            0.336       1448.28  \n",
+              "1421       Hayır            0.275       1434.74  \n",
+              "1422       Hayır            0.189       1518.08  \n",
+              "1423       Hayır            0.275        802.13  \n",
+              "1424        Evet            0.243        433.96  \n",
+              "1425       Hayır            0.355       3269.99  \n",
+              "1426       Hayır            0.373        532.14  \n",
+              "1427       Hayır            0.317        339.87  "
+            ],
+            "text/html": [
+              "\n",
+              "  <div id=\"df-ad5b83c3-ae0f-404b-be44-6f614d481794\" class=\"colab-df-container\">\n",
+              "    <div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>siparis_id</th>\n",
+              "      <th>musteri_id</th>\n",
+              "      <th>siparis_tarihi</th>\n",
+              "      <th>sehir</th>\n",
+              "      <th>bolge</th>\n",
+              "      <th>kategori</th>\n",
+              "      <th>urun_adi</th>\n",
+              "      <th>adet</th>\n",
+              "      <th>birim_fiyat</th>\n",
+              "      <th>indirim_orani</th>\n",
+              "      <th>kargo_ucreti</th>\n",
+              "      <th>odeme_turu</th>\n",
+              "      <th>musteri_tipi</th>\n",
+              "      <th>teslimat_gunu</th>\n",
+              "      <th>musteri_puani</th>\n",
+              "      <th>iade_durumu</th>\n",
+              "      <th>kar_marji_orani</th>\n",
+              "      <th>toplam_tutar</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>1418</th>\n",
+              "      <td>SIP100056</td>\n",
+              "      <td>MUS1238</td>\n",
+              "      <td>2024-04-19 20:27:00</td>\n",
+              "      <td>Ankara</td>\n",
+              "      <td>İç Anadolu</td>\n",
+              "      <td>Kitap</td>\n",
+              "      <td>Veri Bilimi 101</td>\n",
+              "      <td>2</td>\n",
+              "      <td>255.70</td>\n",
+              "      <td>0.05</td>\n",
+              "      <td>59.9</td>\n",
+              "      <td>Kredi Kartı</td>\n",
+              "      <td>Mevcut</td>\n",
+              "      <td>3.0</td>\n",
+              "      <td>2.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.247</td>\n",
+              "      <td>545.73</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1419</th>\n",
+              "      <td>SIP101279</td>\n",
+              "      <td>MUS1149</td>\n",
+              "      <td>2024-08-24 08:38:00</td>\n",
+              "      <td>Ankara</td>\n",
+              "      <td>İç Anadolu</td>\n",
+              "      <td>Elektronik</td>\n",
+              "      <td>Akıllı Saat</td>\n",
+              "      <td>4</td>\n",
+              "      <td>3074.80</td>\n",
+              "      <td>0.15</td>\n",
+              "      <td>39.9</td>\n",
+              "      <td>Banka Kartı</td>\n",
+              "      <td>Yeni</td>\n",
+              "      <td>4.0</td>\n",
+              "      <td>5.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.414</td>\n",
+              "      <td>10494.22</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1420</th>\n",
+              "      <td>SIP100920</td>\n",
+              "      <td>MUS1425</td>\n",
+              "      <td>2025-07-04 14:58:00</td>\n",
+              "      <td>İzmir</td>\n",
+              "      <td>Ege</td>\n",
+              "      <td>Ev ve Yaşam</td>\n",
+              "      <td>Masa Lambası</td>\n",
+              "      <td>2</td>\n",
+              "      <td>699.19</td>\n",
+              "      <td>0.00</td>\n",
+              "      <td>49.9</td>\n",
+              "      <td>Banka Kartı</td>\n",
+              "      <td>Yeni</td>\n",
+              "      <td>2.0</td>\n",
+              "      <td>4.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.336</td>\n",
+              "      <td>1448.28</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1421</th>\n",
+              "      <td>SIP100480</td>\n",
+              "      <td>MUS1323</td>\n",
+              "      <td>2024-06-20 20:34:00</td>\n",
+              "      <td>Ankara</td>\n",
+              "      <td>İç Anadolu</td>\n",
+              "      <td>Elektronik</td>\n",
+              "      <td>Kablosuz Kulaklık</td>\n",
+              "      <td>1</td>\n",
+              "      <td>1468.25</td>\n",
+              "      <td>0.05</td>\n",
+              "      <td>39.9</td>\n",
+              "      <td>Banka Kartı</td>\n",
+              "      <td>Mevcut</td>\n",
+              "      <td>2.0</td>\n",
+              "      <td>4.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.275</td>\n",
+              "      <td>1434.74</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1422</th>\n",
+              "      <td>SIP101222</td>\n",
+              "      <td>MUS1440</td>\n",
+              "      <td>2025-05-14 09:21:00</td>\n",
+              "      <td>Bursa</td>\n",
+              "      <td>Marmara</td>\n",
+              "      <td>Spor</td>\n",
+              "      <td>Dambıl Seti</td>\n",
+              "      <td>1</td>\n",
+              "      <td>1488.18</td>\n",
+              "      <td>0.00</td>\n",
+              "      <td>29.9</td>\n",
+              "      <td>Kredi Kartı</td>\n",
+              "      <td>Mevcut</td>\n",
+              "      <td>3.0</td>\n",
+              "      <td>4.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.189</td>\n",
+              "      <td>1518.08</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1423</th>\n",
+              "      <td>SIP101093</td>\n",
+              "      <td>MUS1187</td>\n",
+              "      <td>2024-06-08 20:42:00</td>\n",
+              "      <td>İstanbul</td>\n",
+              "      <td>Marmara</td>\n",
+              "      <td>Spor</td>\n",
+              "      <td>Yoga Matı</td>\n",
+              "      <td>1</td>\n",
+              "      <td>772.23</td>\n",
+              "      <td>0.00</td>\n",
+              "      <td>29.9</td>\n",
+              "      <td>Kredi Kartı</td>\n",
+              "      <td>Mevcut</td>\n",
+              "      <td>3.0</td>\n",
+              "      <td>2.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.275</td>\n",
+              "      <td>802.13</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1424</th>\n",
+              "      <td>SIP101193</td>\n",
+              "      <td>MUS1297</td>\n",
+              "      <td>2025-11-06 08:17:00</td>\n",
+              "      <td>Gaziantep</td>\n",
+              "      <td>Güneydoğu Anadolu</td>\n",
+              "      <td>Spor</td>\n",
+              "      <td>Suluk</td>\n",
+              "      <td>2</td>\n",
+              "      <td>187.03</td>\n",
+              "      <td>0.00</td>\n",
+              "      <td>59.9</td>\n",
+              "      <td>Kredi Kartı</td>\n",
+              "      <td>Yeni</td>\n",
+              "      <td>2.0</td>\n",
+              "      <td>4.0</td>\n",
+              "      <td>Evet</td>\n",
+              "      <td>0.243</td>\n",
+              "      <td>433.96</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1425</th>\n",
+              "      <td>SIP101210</td>\n",
+              "      <td>MUS1122</td>\n",
+              "      <td>2025-03-07 09:07:00</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>Marmara</td>\n",
+              "      <td>Elektronik</td>\n",
+              "      <td>Webcam</td>\n",
+              "      <td>4</td>\n",
+              "      <td>894.47</td>\n",
+              "      <td>0.10</td>\n",
+              "      <td>49.9</td>\n",
+              "      <td>Kredi Kartı</td>\n",
+              "      <td>Mevcut</td>\n",
+              "      <td>3.0</td>\n",
+              "      <td>5.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.355</td>\n",
+              "      <td>3269.99</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1426</th>\n",
+              "      <td>SIP101060</td>\n",
+              "      <td>MUS1189</td>\n",
+              "      <td>2025-04-19 21:52:00</td>\n",
+              "      <td>Kocaeli</td>\n",
+              "      <td>Marmara</td>\n",
+              "      <td>Kitap</td>\n",
+              "      <td>Veri Bilimi 101</td>\n",
+              "      <td>2</td>\n",
+              "      <td>248.55</td>\n",
+              "      <td>0.05</td>\n",
+              "      <td>59.9</td>\n",
+              "      <td>banka karti</td>\n",
+              "      <td>Yeni</td>\n",
+              "      <td>4.0</td>\n",
+              "      <td>3.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.373</td>\n",
+              "      <td>532.14</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1427</th>\n",
+              "      <td>SIP100642</td>\n",
+              "      <td>MUS1289</td>\n",
+              "      <td>2024-09-22 16:36:00</td>\n",
+              "      <td>Ankara</td>\n",
+              "      <td>İç Anadolu</td>\n",
+              "      <td>Kozmetik</td>\n",
+              "      <td>Güneş Kremi</td>\n",
+              "      <td>1</td>\n",
+              "      <td>424.84</td>\n",
+              "      <td>0.20</td>\n",
+              "      <td>0.0</td>\n",
+              "      <td>Dijital Cüzdan</td>\n",
+              "      <td>Yeni</td>\n",
+              "      <td>2.0</td>\n",
+              "      <td>4.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.317</td>\n",
+              "      <td>339.87</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>\n",
+              "    <div class=\"colab-df-buttons\">\n",
+              "\n",
+              "  <div class=\"colab-df-container\">\n",
+              "    <button class=\"colab-df-convert\" onclick=\"convertToInteractive('df-ad5b83c3-ae0f-404b-be44-6f614d481794')\"\n",
+              "            title=\"Convert this dataframe to an interactive table.\"\n",
+              "            style=\"display:none;\">\n",
+              "\n",
+              "  <svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\" viewBox=\"0 -960 960 960\">\n",
+              "    <path d=\"M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z\"/>\n",
+              "  </svg>\n",
+              "    </button>\n",
+              "\n",
+              "  <style>\n",
+              "    .colab-df-container {\n",
+              "      display:flex;\n",
+              "      gap: 12px;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-convert {\n",
+              "      background-color: #E8F0FE;\n",
+              "      border: none;\n",
+              "      border-radius: 50%;\n",
+              "      cursor: pointer;\n",
+              "      display: none;\n",
+              "      fill: #1967D2;\n",
+              "      height: 32px;\n",
+              "      padding: 0 0 0 0;\n",
+              "      width: 32px;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-convert:hover {\n",
+              "      background-color: #E2EBFA;\n",
+              "      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n",
+              "      fill: #174EA6;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-buttons div {\n",
+              "      margin-bottom: 4px;\n",
+              "    }\n",
+              "\n",
+              "    [theme=dark] .colab-df-convert {\n",
+              "      background-color: #3B4455;\n",
+              "      fill: #D2E3FC;\n",
+              "    }\n",
+              "\n",
+              "    [theme=dark] .colab-df-convert:hover {\n",
+              "      background-color: #434B5C;\n",
+              "      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n",
+              "      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n",
+              "      fill: #FFFFFF;\n",
+              "    }\n",
+              "  </style>\n",
+              "\n",
+              "    <script>\n",
+              "      const buttonEl =\n",
+              "        document.querySelector('#df-ad5b83c3-ae0f-404b-be44-6f614d481794 button.colab-df-convert');\n",
+              "      buttonEl.style.display =\n",
+              "        google.colab.kernel.accessAllowed ? 'block' : 'none';\n",
+              "\n",
+              "      async function convertToInteractive(key) {\n",
+              "        const element = document.querySelector('#df-ad5b83c3-ae0f-404b-be44-6f614d481794');\n",
+              "        const dataTable =\n",
+              "          await google.colab.kernel.invokeFunction('convertToInteractive',\n",
+              "                                                    [key], {});\n",
+              "        if (!dataTable) return;\n",
+              "\n",
+              "        const docLinkHtml = 'Like what you see? Visit the ' +\n",
+              "          '<a target=\"_blank\" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'\n",
+              "          + ' to learn more about interactive tables.';\n",
+              "        element.innerHTML = '';\n",
+              "        dataTable['output_type'] = 'display_data';\n",
+              "        await google.colab.output.renderOutput(dataTable, element);\n",
+              "        const docLink = document.createElement('div');\n",
+              "        docLink.innerHTML = docLinkHtml;\n",
+              "        element.appendChild(docLink);\n",
+              "      }\n",
+              "    </script>\n",
+              "  </div>\n",
+              "\n",
+              "\n",
+              "    </div>\n",
+              "  </div>\n"
+            ],
+            "application/vnd.google.colaboratory.intrinsic+json": {
+              "type": "dataframe",
+              "repr_error": "0"
+            }
+          },
+          "metadata": {},
+          "execution_count": 5
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# 2.Veri setinin satır sayısını, sütun sayısını ve tüm sütun isimlerini ekrana yazdırın.\n",
+        "satir_sayisi=df.shape[0]\n",
+        "satir_sayisi"
+      ],
+      "metadata": {
+        "id": "LYJATBE2XYuC",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "d478f376-93ab-4725-d053-19eb02adeb2d"
+      },
+      "execution_count": 6,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "1428"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 6
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "sutun_sayisi=df.shape[1]\n",
+        "sutun_sayisi"
+      ],
+      "metadata": {
+        "id": "JpjQIC9BZa3Z",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "4f1bb3a6-90a8-4794-a2fb-564be967dbfc"
+      },
+      "execution_count": 7,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "18"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 7
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df.columns.tolist()"
+      ],
+      "metadata": {
+        "id": "Sq5ke1i-Zfdp",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "c4231391-0905-4720-e8b9-1f12277c1f9d"
+      },
+      "execution_count": 8,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "['siparis_id',\n",
+              " 'musteri_id',\n",
+              " 'siparis_tarihi',\n",
+              " 'sehir',\n",
+              " 'bolge',\n",
+              " 'kategori',\n",
+              " 'urun_adi',\n",
+              " 'adet',\n",
+              " 'birim_fiyat',\n",
+              " 'indirim_orani',\n",
+              " 'kargo_ucreti',\n",
+              " 'odeme_turu',\n",
+              " 'musteri_tipi',\n",
+              " 'teslimat_gunu',\n",
+              " 'musteri_puani',\n",
+              " 'iade_durumu',\n",
+              " 'kar_marji_orani',\n",
+              " 'toplam_tutar']"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 8
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# 3. info() ve describe() çıktılarını alın.\n",
+        "# Ardından veri setindeki sayısal sütunları ve kategorik sütunları ayrı ayrı listeleyin.\n",
+        "df.info()"
+      ],
+      "metadata": {
+        "id": "t6HP1FxSaDmx",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "2e6b894c-2da9-40a9-856f-6f92bf21a8fe"
+      },
+      "execution_count": 9,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "<class 'pandas.core.frame.DataFrame'>\n",
+            "RangeIndex: 1428 entries, 0 to 1427\n",
+            "Data columns (total 18 columns):\n",
+            " #   Column           Non-Null Count  Dtype  \n",
+            "---  ------           --------------  -----  \n",
+            " 0   siparis_id       1428 non-null   object \n",
+            " 1   musteri_id       1428 non-null   object \n",
+            " 2   siparis_tarihi   1428 non-null   object \n",
+            " 3   sehir            1403 non-null   object \n",
+            " 4   bolge            1428 non-null   object \n",
+            " 5   kategori         1428 non-null   object \n",
+            " 6   urun_adi         1428 non-null   object \n",
+            " 7   adet             1428 non-null   int64  \n",
+            " 8   birim_fiyat      1428 non-null   float64\n",
+            " 9   indirim_orani    1412 non-null   float64\n",
+            " 10  kargo_ucreti     1428 non-null   float64\n",
+            " 11  odeme_turu       1393 non-null   object \n",
+            " 12  musteri_tipi     1386 non-null   object \n",
+            " 13  teslimat_gunu    1400 non-null   float64\n",
+            " 14  musteri_puani    1372 non-null   float64\n",
+            " 15  iade_durumu      1428 non-null   object \n",
+            " 16  kar_marji_orani  1428 non-null   float64\n",
+            " 17  toplam_tutar     1428 non-null   float64\n",
+            "dtypes: float64(7), int64(1), object(10)\n",
+            "memory usage: 200.9+ KB\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df.describe()"
+      ],
+      "metadata": {
+        "id": "HGQx3_6wcPuI",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 300
+        },
+        "outputId": "51602cde-5943-4e79-adce-e03f89c93fa4"
+      },
+      "execution_count": 10,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "              adet   birim_fiyat  indirim_orani  kargo_ucreti  teslimat_gunu  \\\n",
+              "count  1428.000000   1428.000000    1412.000000   1428.000000    1400.000000   \n",
+              "mean      2.136555    658.477654       0.052054     39.725140       3.370714   \n",
+              "std       2.015770   1042.414639       0.060115     14.185017       1.825990   \n",
+              "min       1.000000     93.110000       0.000000      0.000000       1.000000   \n",
+              "25%       1.000000    199.185000       0.000000     29.900000       2.000000   \n",
+              "50%       2.000000    287.120000       0.050000     39.900000       3.000000   \n",
+              "75%       3.000000    819.177500       0.100000     49.900000       4.000000   \n",
+              "max      38.000000  18145.230000       0.200000     59.900000      31.000000   \n",
+              "\n",
+              "       musteri_puani  kar_marji_orani  toplam_tutar  \n",
+              "count    1372.000000      1428.000000   1428.000000  \n",
+              "mean        4.002187         0.302799   1370.590336  \n",
+              "std         1.096707         0.069795   2961.689500  \n",
+              "min         0.000000         0.180000     89.680000  \n",
+              "25%         3.000000         0.244750    323.855000  \n",
+              "50%         4.000000         0.305000    669.135000  \n",
+              "75%         5.000000         0.362000   1390.950000  \n",
+              "max         7.000000         0.420000  63870.200000  "
+            ],
+            "text/html": [
+              "\n",
+              "  <div id=\"df-e882f4cd-d225-4a7e-8d87-b10e1e1525eb\" class=\"colab-df-container\">\n",
+              "    <div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>adet</th>\n",
+              "      <th>birim_fiyat</th>\n",
+              "      <th>indirim_orani</th>\n",
+              "      <th>kargo_ucreti</th>\n",
+              "      <th>teslimat_gunu</th>\n",
+              "      <th>musteri_puani</th>\n",
+              "      <th>kar_marji_orani</th>\n",
+              "      <th>toplam_tutar</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>count</th>\n",
+              "      <td>1428.000000</td>\n",
+              "      <td>1428.000000</td>\n",
+              "      <td>1412.000000</td>\n",
+              "      <td>1428.000000</td>\n",
+              "      <td>1400.000000</td>\n",
+              "      <td>1372.000000</td>\n",
+              "      <td>1428.000000</td>\n",
+              "      <td>1428.000000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>mean</th>\n",
+              "      <td>2.136555</td>\n",
+              "      <td>658.477654</td>\n",
+              "      <td>0.052054</td>\n",
+              "      <td>39.725140</td>\n",
+              "      <td>3.370714</td>\n",
+              "      <td>4.002187</td>\n",
+              "      <td>0.302799</td>\n",
+              "      <td>1370.590336</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>std</th>\n",
+              "      <td>2.015770</td>\n",
+              "      <td>1042.414639</td>\n",
+              "      <td>0.060115</td>\n",
+              "      <td>14.185017</td>\n",
+              "      <td>1.825990</td>\n",
+              "      <td>1.096707</td>\n",
+              "      <td>0.069795</td>\n",
+              "      <td>2961.689500</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>min</th>\n",
+              "      <td>1.000000</td>\n",
+              "      <td>93.110000</td>\n",
+              "      <td>0.000000</td>\n",
+              "      <td>0.000000</td>\n",
+              "      <td>1.000000</td>\n",
+              "      <td>0.000000</td>\n",
+              "      <td>0.180000</td>\n",
+              "      <td>89.680000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>25%</th>\n",
+              "      <td>1.000000</td>\n",
+              "      <td>199.185000</td>\n",
+              "      <td>0.000000</td>\n",
+              "      <td>29.900000</td>\n",
+              "      <td>2.000000</td>\n",
+              "      <td>3.000000</td>\n",
+              "      <td>0.244750</td>\n",
+              "      <td>323.855000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>50%</th>\n",
+              "      <td>2.000000</td>\n",
+              "      <td>287.120000</td>\n",
+              "      <td>0.050000</td>\n",
+              "      <td>39.900000</td>\n",
+              "      <td>3.000000</td>\n",
+              "      <td>4.000000</td>\n",
+              "      <td>0.305000</td>\n",
+              "      <td>669.135000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>75%</th>\n",
+              "      <td>3.000000</td>\n",
+              "      <td>819.177500</td>\n",
+              "      <td>0.100000</td>\n",
+              "      <td>49.900000</td>\n",
+              "      <td>4.000000</td>\n",
+              "      <td>5.000000</td>\n",
+              "      <td>0.362000</td>\n",
+              "      <td>1390.950000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>max</th>\n",
+              "      <td>38.000000</td>\n",
+              "      <td>18145.230000</td>\n",
+              "      <td>0.200000</td>\n",
+              "      <td>59.900000</td>\n",
+              "      <td>31.000000</td>\n",
+              "      <td>7.000000</td>\n",
+              "      <td>0.420000</td>\n",
+              "      <td>63870.200000</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>\n",
+              "    <div class=\"colab-df-buttons\">\n",
+              "\n",
+              "  <div class=\"colab-df-container\">\n",
+              "    <button class=\"colab-df-convert\" onclick=\"convertToInteractive('df-e882f4cd-d225-4a7e-8d87-b10e1e1525eb')\"\n",
+              "            title=\"Convert this dataframe to an interactive table.\"\n",
+              "            style=\"display:none;\">\n",
+              "\n",
+              "  <svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\" viewBox=\"0 -960 960 960\">\n",
+              "    <path d=\"M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z\"/>\n",
+              "  </svg>\n",
+              "    </button>\n",
+              "\n",
+              "  <style>\n",
+              "    .colab-df-container {\n",
+              "      display:flex;\n",
+              "      gap: 12px;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-convert {\n",
+              "      background-color: #E8F0FE;\n",
+              "      border: none;\n",
+              "      border-radius: 50%;\n",
+              "      cursor: pointer;\n",
+              "      display: none;\n",
+              "      fill: #1967D2;\n",
+              "      height: 32px;\n",
+              "      padding: 0 0 0 0;\n",
+              "      width: 32px;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-convert:hover {\n",
+              "      background-color: #E2EBFA;\n",
+              "      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n",
+              "      fill: #174EA6;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-buttons div {\n",
+              "      margin-bottom: 4px;\n",
+              "    }\n",
+              "\n",
+              "    [theme=dark] .colab-df-convert {\n",
+              "      background-color: #3B4455;\n",
+              "      fill: #D2E3FC;\n",
+              "    }\n",
+              "\n",
+              "    [theme=dark] .colab-df-convert:hover {\n",
+              "      background-color: #434B5C;\n",
+              "      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n",
+              "      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n",
+              "      fill: #FFFFFF;\n",
+              "    }\n",
+              "  </style>\n",
+              "\n",
+              "    <script>\n",
+              "      const buttonEl =\n",
+              "        document.querySelector('#df-e882f4cd-d225-4a7e-8d87-b10e1e1525eb button.colab-df-convert');\n",
+              "      buttonEl.style.display =\n",
+              "        google.colab.kernel.accessAllowed ? 'block' : 'none';\n",
+              "\n",
+              "      async function convertToInteractive(key) {\n",
+              "        const element = document.querySelector('#df-e882f4cd-d225-4a7e-8d87-b10e1e1525eb');\n",
+              "        const dataTable =\n",
+              "          await google.colab.kernel.invokeFunction('convertToInteractive',\n",
+              "                                                    [key], {});\n",
+              "        if (!dataTable) return;\n",
+              "\n",
+              "        const docLinkHtml = 'Like what you see? Visit the ' +\n",
+              "          '<a target=\"_blank\" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'\n",
+              "          + ' to learn more about interactive tables.';\n",
+              "        element.innerHTML = '';\n",
+              "        dataTable['output_type'] = 'display_data';\n",
+              "        await google.colab.output.renderOutput(dataTable, element);\n",
+              "        const docLink = document.createElement('div');\n",
+              "        docLink.innerHTML = docLinkHtml;\n",
+              "        element.appendChild(docLink);\n",
+              "      }\n",
+              "    </script>\n",
+              "  </div>\n",
+              "\n",
+              "\n",
+              "    </div>\n",
+              "  </div>\n"
+            ],
+            "application/vnd.google.colaboratory.intrinsic+json": {
+              "type": "dataframe",
+              "summary": "{\n  \"name\": \"df\",\n  \"rows\": 8,\n  \"fields\": [\n    {\n      \"column\": \"adet\",\n      \"properties\": {\n        \"dtype\": \"number\",\n        \"std\": 502.5512417814931,\n        \"min\": 1.0,\n        \"max\": 1428.0,\n        \"num_unique_values\": 7,\n        \"samples\": [\n          1428.0,\n          2.1365546218487395,\n          3.0\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"birim_fiyat\",\n      \"properties\": {\n        \"dtype\": \"number\",\n        \"std\": 6203.157158729463,\n        \"min\": 93.11,\n        \"max\": 18145.23,\n        \"num_unique_values\": 8,\n        \"samples\": [\n          658.4776540616247,\n          287.12,\n          1428.0\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"indirim_orani\",\n      \"properties\": {\n        \"dtype\": \"number\",\n        \"std\": 499.1940485315554,\n        \"min\": 0.0,\n        \"max\": 1412.0,\n        \"num_unique_values\": 7,\n        \"samples\": [\n          1412.0,\n          0.052053824362606235,\n          0.1\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"kargo_ucreti\",\n      \"properties\": {\n        \"dtype\": \"number\",\n        \"std\": 493.4500034595047,\n        \"min\": 0.0,\n        \"max\": 1428.0,\n        \"num_unique_values\": 8,\n        \"samples\": [\n          39.7251400560224,\n          39.9,\n          1428.0\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"teslimat_gunu\",\n      \"properties\": {\n        \"dtype\": \"number\",\n        \"std\": 492.74306295628537,\n        \"min\": 1.0,\n        \"max\": 1400.0,\n        \"num_unique_values\": 8,\n        \"samples\": [\n          3.3707142857142856,\n          3.0,\n          1400.0\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"musteri_puani\",\n      \"properties\": {\n        \"dtype\": \"number\",\n        \"std\": 483.86298312533125,\n        \"min\": 0.0,\n        \"max\": 1372.0,\n        \"num_unique_values\": 8,\n        \"samples\": [\n          4.002186588921282,\n          4.0,\n          1372.0\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"kar_marji_orani\",\n      \"properties\": {\n        \"dtype\": \"number\",\n        \"std\": 504.7790796283703,\n        \"min\": 0.0697951618962644,\n        \"max\": 1428.0,\n        \"num_unique_values\": 8,\n        \"samples\": [\n          0.3027990196078431,\n          0.305,\n          1428.0\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"toplam_tutar\",\n      \"properties\": {\n        \"dtype\": \"number\",\n        \"std\": 22183.36574706352,\n        \"min\": 89.68,\n        \"max\": 63870.2,\n        \"num_unique_values\": 8,\n        \"samples\": [\n          1370.5903361344538,\n          669.135,\n          1428.0\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    }\n  ]\n}"
+            }
+          },
+          "metadata": {},
+          "execution_count": 10
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "sayisal_sutunlar=df.select_dtypes(include= [\"int64\",\"float64\"]).columns.tolist()\n",
+        "sayisal_sutunlar"
+      ],
+      "metadata": {
+        "id": "JDqgtPP5cux4",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "705d2089-4974-4aad-ad06-ff89a64f9897"
+      },
+      "execution_count": 11,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "['adet',\n",
+              " 'birim_fiyat',\n",
+              " 'indirim_orani',\n",
+              " 'kargo_ucreti',\n",
+              " 'teslimat_gunu',\n",
+              " 'musteri_puani',\n",
+              " 'kar_marji_orani',\n",
+              " 'toplam_tutar']"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 11
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "kategorik_sutunlar=df.select_dtypes(include=[\"object\"]).columns.tolist()\n",
+        "kategorik_sutunlar"
+      ],
+      "metadata": {
+        "id": "heI6GYTRdimQ",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "a5db15e3-e4db-4aa3-81e3-3cd2839a0d54"
+      },
+      "execution_count": 12,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "['siparis_id',\n",
+              " 'musteri_id',\n",
+              " 'siparis_tarihi',\n",
+              " 'sehir',\n",
+              " 'bolge',\n",
+              " 'kategori',\n",
+              " 'urun_adi',\n",
+              " 'odeme_turu',\n",
+              " 'musteri_tipi',\n",
+              " 'iade_durumu']"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 12
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# 4.Her sütundaki eksik değer sayısını hesaplayın.\n",
+        "#Sonra eksik veri oranlarını yüzde olarak çıkarın ve eksik veri oranı en yüksek 5 sütunu yazdırın.\n",
+        "df.isnull().sum()"
+      ],
+      "metadata": {
+        "id": "XB9Ou-Cqdq2g",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 648
+        },
+        "outputId": "da97ba92-1320-46d8-eb5b-cec208ea6413"
+      },
+      "execution_count": 13,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "siparis_id          0\n",
+              "musteri_id          0\n",
+              "siparis_tarihi      0\n",
+              "sehir              25\n",
+              "bolge               0\n",
+              "kategori            0\n",
+              "urun_adi            0\n",
+              "adet                0\n",
+              "birim_fiyat         0\n",
+              "indirim_orani      16\n",
+              "kargo_ucreti        0\n",
+              "odeme_turu         35\n",
+              "musteri_tipi       42\n",
+              "teslimat_gunu      28\n",
+              "musteri_puani      56\n",
+              "iade_durumu         0\n",
+              "kar_marji_orani     0\n",
+              "toplam_tutar        0\n",
+              "dtype: int64"
+            ],
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>0</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>siparis_id</th>\n",
+              "      <td>0</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>musteri_id</th>\n",
+              "      <td>0</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>siparis_tarihi</th>\n",
+              "      <td>0</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>sehir</th>\n",
+              "      <td>25</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>bolge</th>\n",
+              "      <td>0</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>kategori</th>\n",
+              "      <td>0</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>urun_adi</th>\n",
+              "      <td>0</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>adet</th>\n",
+              "      <td>0</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>birim_fiyat</th>\n",
+              "      <td>0</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>indirim_orani</th>\n",
+              "      <td>16</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>kargo_ucreti</th>\n",
+              "      <td>0</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>odeme_turu</th>\n",
+              "      <td>35</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>musteri_tipi</th>\n",
+              "      <td>42</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>teslimat_gunu</th>\n",
+              "      <td>28</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>musteri_puani</th>\n",
+              "      <td>56</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>iade_durumu</th>\n",
+              "      <td>0</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>kar_marji_orani</th>\n",
+              "      <td>0</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>toplam_tutar</th>\n",
+              "      <td>0</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div><br><label><b>dtype:</b> int64</label>"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 13
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "eksik_veri_sayilari=df.isnull().sum()\n",
+        "eksik_veri_oranlari=(eksik_veri_sayilari/len(df))*100\n",
+        "eksik_veri_oranlari"
+      ],
+      "metadata": {
+        "id": "5JfN4Wo7fDxv",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 648
+        },
+        "outputId": "234f3a09-46a5-45c7-ef4a-6a1864218dc7"
+      },
+      "execution_count": 14,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "siparis_id         0.000000\n",
+              "musteri_id         0.000000\n",
+              "siparis_tarihi     0.000000\n",
+              "sehir              1.750700\n",
+              "bolge              0.000000\n",
+              "kategori           0.000000\n",
+              "urun_adi           0.000000\n",
+              "adet               0.000000\n",
+              "birim_fiyat        0.000000\n",
+              "indirim_orani      1.120448\n",
+              "kargo_ucreti       0.000000\n",
+              "odeme_turu         2.450980\n",
+              "musteri_tipi       2.941176\n",
+              "teslimat_gunu      1.960784\n",
+              "musteri_puani      3.921569\n",
+              "iade_durumu        0.000000\n",
+              "kar_marji_orani    0.000000\n",
+              "toplam_tutar       0.000000\n",
+              "dtype: float64"
+            ],
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>0</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>siparis_id</th>\n",
+              "      <td>0.000000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>musteri_id</th>\n",
+              "      <td>0.000000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>siparis_tarihi</th>\n",
+              "      <td>0.000000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>sehir</th>\n",
+              "      <td>1.750700</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>bolge</th>\n",
+              "      <td>0.000000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>kategori</th>\n",
+              "      <td>0.000000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>urun_adi</th>\n",
+              "      <td>0.000000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>adet</th>\n",
+              "      <td>0.000000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>birim_fiyat</th>\n",
+              "      <td>0.000000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>indirim_orani</th>\n",
+              "      <td>1.120448</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>kargo_ucreti</th>\n",
+              "      <td>0.000000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>odeme_turu</th>\n",
+              "      <td>2.450980</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>musteri_tipi</th>\n",
+              "      <td>2.941176</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>teslimat_gunu</th>\n",
+              "      <td>1.960784</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>musteri_puani</th>\n",
+              "      <td>3.921569</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>iade_durumu</th>\n",
+              "      <td>0.000000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>kar_marji_orani</th>\n",
+              "      <td>0.000000</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>toplam_tutar</th>\n",
+              "      <td>0.000000</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div><br><label><b>dtype:</b> float64</label>"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 14
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "eksik_veri_oranlari.sort_values(ascending=False).head(5)"
+      ],
+      "metadata": {
+        "id": "JQbRngKPjOtG",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 241
+        },
+        "outputId": "7192ec08-09ce-4842-eda1-20fc531ec2f8"
+      },
+      "execution_count": 15,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "musteri_puani    3.921569\n",
+              "musteri_tipi     2.941176\n",
+              "odeme_turu       2.450980\n",
+              "teslimat_gunu    1.960784\n",
+              "sehir            1.750700\n",
+              "dtype: float64"
+            ],
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>0</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>musteri_puani</th>\n",
+              "      <td>3.921569</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>musteri_tipi</th>\n",
+              "      <td>2.941176</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>odeme_turu</th>\n",
+              "      <td>2.450980</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>teslimat_gunu</th>\n",
+              "      <td>1.960784</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>sehir</th>\n",
+              "      <td>1.750700</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div><br><label><b>dtype:</b> float64</label>"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 15
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#5.\tEn az bir eksik değer içeren satırları filtreleyin ve bu satırlardan ilk 20 tanesini ekrana yazdırın.\n",
+        "eksik_veri_satirlari=df[df.isnull().any(axis=1)]\n",
+        "eksik_veri_satirlari.head(20)\n"
+      ],
+      "metadata": {
+        "id": "uhoNhz9cj3Zl",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 1000
+        },
+        "outputId": "0e3979d2-edde-48b9-f7f2-3d5b54156403"
+      },
+      "execution_count": 16,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "    siparis_id musteri_id       siparis_tarihi      sehir              bolge  \\\n",
+              "19   SIP100677    MUS1148  2024-07-11 16:24:00      Adana            Akdeniz   \n",
+              "33   SIP101126    MUS1406  2024-09-11 20:05:00     Mersin            Akdeniz   \n",
+              "50   SIP101040    MUS1386  2025-04-01 09:30:00    Trabzon          Karadeniz   \n",
+              "60   SIP100890    MUS1271  2024-11-07 19:47:00      İzmir                Ege   \n",
+              "61   SIP101317    MUS1060  2024-09-05 20:49:00        NaN            Akdeniz   \n",
+              "70   SIP100715    MUS1033  2024-11-10 21:50:00   İstanbul            Marmara   \n",
+              "82   SIP100807    MUS1431  2025-01-07 14:12:00     Ankara         İç Anadolu   \n",
+              "84   SIP100679    MUS1310  2024-05-20 18:51:00      İzmir                Ege   \n",
+              "86   SIP101071    MUS1131  2024-09-18 12:24:00        NaN         İç Anadolu   \n",
+              "92   SIP101366    MUS1347  2025-03-04 14:00:00      Bursa            Marmara   \n",
+              "96   SIP101067    MUS1337  2025-06-02 12:23:00  Gaziantep  Güneydoğu Anadolu   \n",
+              "104  SIP100671    MUS1072  2025-01-23 13:31:00   İstanbul            Marmara   \n",
+              "108  SIP101239    MUS1016  2024-05-31 14:54:00      Bursa            Marmara   \n",
+              "122  SIP100540    MUS1186  2025-12-06 08:00:00      Adana            Akdeniz   \n",
+              "140  SIP100157    MUS1309  2025-10-22 21:09:00   İstanbul            Marmara   \n",
+              "144  SIP100486    MUS1408  2025-11-07 08:30:00     Samsun          Karadeniz   \n",
+              "145  SIP100448    MUS1286  2025-05-08 13:42:00   İstanbul            Marmara   \n",
+              "146  SIP101065    MUS1003  2024-07-31 18:57:00     Mersin            Akdeniz   \n",
+              "152  SIP101234    MUS1181  2024-09-27 22:04:00      İzmir                Ege   \n",
+              "153  SIP100520    MUS1285  2024-07-27 14:35:00      Konya         İç Anadolu   \n",
+              "\n",
+              "        kategori            urun_adi  adet  birim_fiyat  indirim_orani  \\\n",
+              "19          Spor         Dambıl Seti     4      1517.65           0.00   \n",
+              "33    Elektronik  Bluetooth Hoparlör     1      1159.89           0.10   \n",
+              "50          Spor         Dambıl Seti     1      1554.15           0.00   \n",
+              "60         Kitap        Girişimcilik     4       216.38            NaN   \n",
+              "61   Ev ve Yaşam      Saklama Kutusu     1       233.63           0.10   \n",
+              "70   Ev ve Yaşam              Termos     1       552.05           0.00   \n",
+              "82      Kozmetik         Güneş Kremi     1       451.28           0.00   \n",
+              "84   Ev ve Yaşam              Termos     2       477.62           0.00   \n",
+              "86    Elektronik           Powerbank     1       816.74           0.00   \n",
+              "92   Ev ve Yaşam           Organizer     1       272.40           0.00   \n",
+              "96    Elektronik   Kablosuz Kulaklık     2      1541.34           0.00   \n",
+              "104  Elektronik            Powerbank     2       865.60            NaN   \n",
+              "108        Kitap     Veri Bilimi 101     2       244.83            NaN   \n",
+              "122         Spor               Suluk     3       217.68           0.05   \n",
+              "140         Ofis           Mouse Pad     2       173.36           0.10   \n",
+              "144         Spor        Direnç Bandı     1       261.24           0.00   \n",
+              "145        Kitap      Python Notları     1       218.56           0.00   \n",
+              "146     Kozmetik  Yüz Temizleme Jeli     1       320.23           0.00   \n",
+              "152   Elektronik  Bluetooth Hoparlör     1      1158.27            NaN   \n",
+              "153        Kitap      Zaman Yönetimi     2       180.85           0.00   \n",
+              "\n",
+              "     kargo_ucreti      odeme_turu musteri_tipi  teslimat_gunu  musteri_puani  \\\n",
+              "19           29.9    Kapıda Ödeme       Mevcut            3.0            NaN   \n",
+              "33           39.9     Kredi Kartı          NaN            2.0            4.0   \n",
+              "50           49.9     Banka Kartı          NaN            4.0            5.0   \n",
+              "60           49.9     Kredi Kartı         Yeni            1.0            3.0   \n",
+              "61           29.9  Dijital Cüzdan         Yeni            5.0            2.0   \n",
+              "70           39.9             NaN       Mevcut            2.0            3.0   \n",
+              "82           49.9     Kredi Kartı          NaN            4.0            5.0   \n",
+              "84           49.9     Kredi Kartı       Mevcut            NaN            4.0   \n",
+              "86           39.9     Banka Kartı         Yeni            3.0            5.0   \n",
+              "92           29.9     Kredi Kartı       Mevcut            1.0            NaN   \n",
+              "96           29.9  Dijital Cüzdan          NaN            5.0            4.0   \n",
+              "104           0.0     Banka Kartı         Yeni            5.0            3.0   \n",
+              "108          39.9     Kredi Kartı          Vip            4.0            1.0   \n",
+              "122          29.9             NaN       mevcut            4.0            4.0   \n",
+              "140          29.9     Kredi Kartı         Yeni            2.0            NaN   \n",
+              "144          39.9     Kredi Kartı         Yeni            5.0            NaN   \n",
+              "145           0.0     Banka Kartı          NaN            2.0            4.0   \n",
+              "146          39.9     Kredi Kartı          NaN            3.0            5.0   \n",
+              "152          39.9     Kredi Kartı       Mevcut            4.0            5.0   \n",
+              "153           0.0             NaN       Mevcut            4.0            2.0   \n",
+              "\n",
+              "    iade_durumu  kar_marji_orani  toplam_tutar  \n",
+              "19        Hayır            0.311       6100.50  \n",
+              "33        Hayır            0.204       1083.80  \n",
+              "50        Hayır            0.217       1604.05  \n",
+              "60        Hayır            0.199        915.42  \n",
+              "61        Hayır            0.385        240.17  \n",
+              "70        Hayır            0.185        591.95  \n",
+              "82        Hayır            0.315        501.18  \n",
+              "84        Hayır            0.323       1005.14  \n",
+              "86        Hayır            0.301        856.64  \n",
+              "92        Hayır            0.212        302.30  \n",
+              "96        Hayır            0.274       3112.58  \n",
+              "104       Hayır            0.336       1731.20  \n",
+              "108       Hayır            0.321        529.56  \n",
+              "122       Hayır            0.281        650.29  \n",
+              "140       Hayır            0.338        341.95  \n",
+              "144       Hayır            0.315        301.14  \n",
+              "145       Hayır            0.300        218.56  \n",
+              "146       Hayır            0.190        360.13  \n",
+              "152        Evet            0.220       1198.17  \n",
+              "153       Hayır            0.375        361.70  "
+            ],
+            "text/html": [
+              "\n",
+              "  <div id=\"df-a8758b3a-e183-4dd5-9b07-d81c3007a214\" class=\"colab-df-container\">\n",
+              "    <div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>siparis_id</th>\n",
+              "      <th>musteri_id</th>\n",
+              "      <th>siparis_tarihi</th>\n",
+              "      <th>sehir</th>\n",
+              "      <th>bolge</th>\n",
+              "      <th>kategori</th>\n",
+              "      <th>urun_adi</th>\n",
+              "      <th>adet</th>\n",
+              "      <th>birim_fiyat</th>\n",
+              "      <th>indirim_orani</th>\n",
+              "      <th>kargo_ucreti</th>\n",
+              "      <th>odeme_turu</th>\n",
+              "      <th>musteri_tipi</th>\n",
+              "      <th>teslimat_gunu</th>\n",
+              "      <th>musteri_puani</th>\n",
+              "      <th>iade_durumu</th>\n",
+              "      <th>kar_marji_orani</th>\n",
+              "      <th>toplam_tutar</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>19</th>\n",
+              "      <td>SIP100677</td>\n",
+              "      <td>MUS1148</td>\n",
+              "      <td>2024-07-11 16:24:00</td>\n",
+              "      <td>Adana</td>\n",
+              "      <td>Akdeniz</td>\n",
+              "      <td>Spor</td>\n",
+              "      <td>Dambıl Seti</td>\n",
+              "      <td>4</td>\n",
+              "      <td>1517.65</td>\n",
+              "      <td>0.00</td>\n",
+              "      <td>29.9</td>\n",
+              "      <td>Kapıda Ödeme</td>\n",
+              "      <td>Mevcut</td>\n",
+              "      <td>3.0</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.311</td>\n",
+              "      <td>6100.50</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>33</th>\n",
+              "      <td>SIP101126</td>\n",
+              "      <td>MUS1406</td>\n",
+              "      <td>2024-09-11 20:05:00</td>\n",
+              "      <td>Mersin</td>\n",
+              "      <td>Akdeniz</td>\n",
+              "      <td>Elektronik</td>\n",
+              "      <td>Bluetooth Hoparlör</td>\n",
+              "      <td>1</td>\n",
+              "      <td>1159.89</td>\n",
+              "      <td>0.10</td>\n",
+              "      <td>39.9</td>\n",
+              "      <td>Kredi Kartı</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>2.0</td>\n",
+              "      <td>4.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.204</td>\n",
+              "      <td>1083.80</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>50</th>\n",
+              "      <td>SIP101040</td>\n",
+              "      <td>MUS1386</td>\n",
+              "      <td>2025-04-01 09:30:00</td>\n",
+              "      <td>Trabzon</td>\n",
+              "      <td>Karadeniz</td>\n",
+              "      <td>Spor</td>\n",
+              "      <td>Dambıl Seti</td>\n",
+              "      <td>1</td>\n",
+              "      <td>1554.15</td>\n",
+              "      <td>0.00</td>\n",
+              "      <td>49.9</td>\n",
+              "      <td>Banka Kartı</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>4.0</td>\n",
+              "      <td>5.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.217</td>\n",
+              "      <td>1604.05</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>60</th>\n",
+              "      <td>SIP100890</td>\n",
+              "      <td>MUS1271</td>\n",
+              "      <td>2024-11-07 19:47:00</td>\n",
+              "      <td>İzmir</td>\n",
+              "      <td>Ege</td>\n",
+              "      <td>Kitap</td>\n",
+              "      <td>Girişimcilik</td>\n",
+              "      <td>4</td>\n",
+              "      <td>216.38</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>49.9</td>\n",
+              "      <td>Kredi Kartı</td>\n",
+              "      <td>Yeni</td>\n",
+              "      <td>1.0</td>\n",
+              "      <td>3.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.199</td>\n",
+              "      <td>915.42</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>61</th>\n",
+              "      <td>SIP101317</td>\n",
+              "      <td>MUS1060</td>\n",
+              "      <td>2024-09-05 20:49:00</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>Akdeniz</td>\n",
+              "      <td>Ev ve Yaşam</td>\n",
+              "      <td>Saklama Kutusu</td>\n",
+              "      <td>1</td>\n",
+              "      <td>233.63</td>\n",
+              "      <td>0.10</td>\n",
+              "      <td>29.9</td>\n",
+              "      <td>Dijital Cüzdan</td>\n",
+              "      <td>Yeni</td>\n",
+              "      <td>5.0</td>\n",
+              "      <td>2.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.385</td>\n",
+              "      <td>240.17</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>70</th>\n",
+              "      <td>SIP100715</td>\n",
+              "      <td>MUS1033</td>\n",
+              "      <td>2024-11-10 21:50:00</td>\n",
+              "      <td>İstanbul</td>\n",
+              "      <td>Marmara</td>\n",
+              "      <td>Ev ve Yaşam</td>\n",
+              "      <td>Termos</td>\n",
+              "      <td>1</td>\n",
+              "      <td>552.05</td>\n",
+              "      <td>0.00</td>\n",
+              "      <td>39.9</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>Mevcut</td>\n",
+              "      <td>2.0</td>\n",
+              "      <td>3.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.185</td>\n",
+              "      <td>591.95</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>82</th>\n",
+              "      <td>SIP100807</td>\n",
+              "      <td>MUS1431</td>\n",
+              "      <td>2025-01-07 14:12:00</td>\n",
+              "      <td>Ankara</td>\n",
+              "      <td>İç Anadolu</td>\n",
+              "      <td>Kozmetik</td>\n",
+              "      <td>Güneş Kremi</td>\n",
+              "      <td>1</td>\n",
+              "      <td>451.28</td>\n",
+              "      <td>0.00</td>\n",
+              "      <td>49.9</td>\n",
+              "      <td>Kredi Kartı</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>4.0</td>\n",
+              "      <td>5.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.315</td>\n",
+              "      <td>501.18</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>84</th>\n",
+              "      <td>SIP100679</td>\n",
+              "      <td>MUS1310</td>\n",
+              "      <td>2024-05-20 18:51:00</td>\n",
+              "      <td>İzmir</td>\n",
+              "      <td>Ege</td>\n",
+              "      <td>Ev ve Yaşam</td>\n",
+              "      <td>Termos</td>\n",
+              "      <td>2</td>\n",
+              "      <td>477.62</td>\n",
+              "      <td>0.00</td>\n",
+              "      <td>49.9</td>\n",
+              "      <td>Kredi Kartı</td>\n",
+              "      <td>Mevcut</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>4.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.323</td>\n",
+              "      <td>1005.14</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>86</th>\n",
+              "      <td>SIP101071</td>\n",
+              "      <td>MUS1131</td>\n",
+              "      <td>2024-09-18 12:24:00</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>İç Anadolu</td>\n",
+              "      <td>Elektronik</td>\n",
+              "      <td>Powerbank</td>\n",
+              "      <td>1</td>\n",
+              "      <td>816.74</td>\n",
+              "      <td>0.00</td>\n",
+              "      <td>39.9</td>\n",
+              "      <td>Banka Kartı</td>\n",
+              "      <td>Yeni</td>\n",
+              "      <td>3.0</td>\n",
+              "      <td>5.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.301</td>\n",
+              "      <td>856.64</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>92</th>\n",
+              "      <td>SIP101366</td>\n",
+              "      <td>MUS1347</td>\n",
+              "      <td>2025-03-04 14:00:00</td>\n",
+              "      <td>Bursa</td>\n",
+              "      <td>Marmara</td>\n",
+              "      <td>Ev ve Yaşam</td>\n",
+              "      <td>Organizer</td>\n",
+              "      <td>1</td>\n",
+              "      <td>272.40</td>\n",
+              "      <td>0.00</td>\n",
+              "      <td>29.9</td>\n",
+              "      <td>Kredi Kartı</td>\n",
+              "      <td>Mevcut</td>\n",
+              "      <td>1.0</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.212</td>\n",
+              "      <td>302.30</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>96</th>\n",
+              "      <td>SIP101067</td>\n",
+              "      <td>MUS1337</td>\n",
+              "      <td>2025-06-02 12:23:00</td>\n",
+              "      <td>Gaziantep</td>\n",
+              "      <td>Güneydoğu Anadolu</td>\n",
+              "      <td>Elektronik</td>\n",
+              "      <td>Kablosuz Kulaklık</td>\n",
+              "      <td>2</td>\n",
+              "      <td>1541.34</td>\n",
+              "      <td>0.00</td>\n",
+              "      <td>29.9</td>\n",
+              "      <td>Dijital Cüzdan</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>5.0</td>\n",
+              "      <td>4.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.274</td>\n",
+              "      <td>3112.58</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>104</th>\n",
+              "      <td>SIP100671</td>\n",
+              "      <td>MUS1072</td>\n",
+              "      <td>2025-01-23 13:31:00</td>\n",
+              "      <td>İstanbul</td>\n",
+              "      <td>Marmara</td>\n",
+              "      <td>Elektronik</td>\n",
+              "      <td>Powerbank</td>\n",
+              "      <td>2</td>\n",
+              "      <td>865.60</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>0.0</td>\n",
+              "      <td>Banka Kartı</td>\n",
+              "      <td>Yeni</td>\n",
+              "      <td>5.0</td>\n",
+              "      <td>3.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.336</td>\n",
+              "      <td>1731.20</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>108</th>\n",
+              "      <td>SIP101239</td>\n",
+              "      <td>MUS1016</td>\n",
+              "      <td>2024-05-31 14:54:00</td>\n",
+              "      <td>Bursa</td>\n",
+              "      <td>Marmara</td>\n",
+              "      <td>Kitap</td>\n",
+              "      <td>Veri Bilimi 101</td>\n",
+              "      <td>2</td>\n",
+              "      <td>244.83</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>39.9</td>\n",
+              "      <td>Kredi Kartı</td>\n",
+              "      <td>Vip</td>\n",
+              "      <td>4.0</td>\n",
+              "      <td>1.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.321</td>\n",
+              "      <td>529.56</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>122</th>\n",
+              "      <td>SIP100540</td>\n",
+              "      <td>MUS1186</td>\n",
+              "      <td>2025-12-06 08:00:00</td>\n",
+              "      <td>Adana</td>\n",
+              "      <td>Akdeniz</td>\n",
+              "      <td>Spor</td>\n",
+              "      <td>Suluk</td>\n",
+              "      <td>3</td>\n",
+              "      <td>217.68</td>\n",
+              "      <td>0.05</td>\n",
+              "      <td>29.9</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>mevcut</td>\n",
+              "      <td>4.0</td>\n",
+              "      <td>4.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.281</td>\n",
+              "      <td>650.29</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>140</th>\n",
+              "      <td>SIP100157</td>\n",
+              "      <td>MUS1309</td>\n",
+              "      <td>2025-10-22 21:09:00</td>\n",
+              "      <td>İstanbul</td>\n",
+              "      <td>Marmara</td>\n",
+              "      <td>Ofis</td>\n",
+              "      <td>Mouse Pad</td>\n",
+              "      <td>2</td>\n",
+              "      <td>173.36</td>\n",
+              "      <td>0.10</td>\n",
+              "      <td>29.9</td>\n",
+              "      <td>Kredi Kartı</td>\n",
+              "      <td>Yeni</td>\n",
+              "      <td>2.0</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.338</td>\n",
+              "      <td>341.95</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>144</th>\n",
+              "      <td>SIP100486</td>\n",
+              "      <td>MUS1408</td>\n",
+              "      <td>2025-11-07 08:30:00</td>\n",
+              "      <td>Samsun</td>\n",
+              "      <td>Karadeniz</td>\n",
+              "      <td>Spor</td>\n",
+              "      <td>Direnç Bandı</td>\n",
+              "      <td>1</td>\n",
+              "      <td>261.24</td>\n",
+              "      <td>0.00</td>\n",
+              "      <td>39.9</td>\n",
+              "      <td>Kredi Kartı</td>\n",
+              "      <td>Yeni</td>\n",
+              "      <td>5.0</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.315</td>\n",
+              "      <td>301.14</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>145</th>\n",
+              "      <td>SIP100448</td>\n",
+              "      <td>MUS1286</td>\n",
+              "      <td>2025-05-08 13:42:00</td>\n",
+              "      <td>İstanbul</td>\n",
+              "      <td>Marmara</td>\n",
+              "      <td>Kitap</td>\n",
+              "      <td>Python Notları</td>\n",
+              "      <td>1</td>\n",
+              "      <td>218.56</td>\n",
+              "      <td>0.00</td>\n",
+              "      <td>0.0</td>\n",
+              "      <td>Banka Kartı</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>2.0</td>\n",
+              "      <td>4.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.300</td>\n",
+              "      <td>218.56</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>146</th>\n",
+              "      <td>SIP101065</td>\n",
+              "      <td>MUS1003</td>\n",
+              "      <td>2024-07-31 18:57:00</td>\n",
+              "      <td>Mersin</td>\n",
+              "      <td>Akdeniz</td>\n",
+              "      <td>Kozmetik</td>\n",
+              "      <td>Yüz Temizleme Jeli</td>\n",
+              "      <td>1</td>\n",
+              "      <td>320.23</td>\n",
+              "      <td>0.00</td>\n",
+              "      <td>39.9</td>\n",
+              "      <td>Kredi Kartı</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>3.0</td>\n",
+              "      <td>5.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.190</td>\n",
+              "      <td>360.13</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>152</th>\n",
+              "      <td>SIP101234</td>\n",
+              "      <td>MUS1181</td>\n",
+              "      <td>2024-09-27 22:04:00</td>\n",
+              "      <td>İzmir</td>\n",
+              "      <td>Ege</td>\n",
+              "      <td>Elektronik</td>\n",
+              "      <td>Bluetooth Hoparlör</td>\n",
+              "      <td>1</td>\n",
+              "      <td>1158.27</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>39.9</td>\n",
+              "      <td>Kredi Kartı</td>\n",
+              "      <td>Mevcut</td>\n",
+              "      <td>4.0</td>\n",
+              "      <td>5.0</td>\n",
+              "      <td>Evet</td>\n",
+              "      <td>0.220</td>\n",
+              "      <td>1198.17</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>153</th>\n",
+              "      <td>SIP100520</td>\n",
+              "      <td>MUS1285</td>\n",
+              "      <td>2024-07-27 14:35:00</td>\n",
+              "      <td>Konya</td>\n",
+              "      <td>İç Anadolu</td>\n",
+              "      <td>Kitap</td>\n",
+              "      <td>Zaman Yönetimi</td>\n",
+              "      <td>2</td>\n",
+              "      <td>180.85</td>\n",
+              "      <td>0.00</td>\n",
+              "      <td>0.0</td>\n",
+              "      <td>NaN</td>\n",
+              "      <td>Mevcut</td>\n",
+              "      <td>4.0</td>\n",
+              "      <td>2.0</td>\n",
+              "      <td>Hayır</td>\n",
+              "      <td>0.375</td>\n",
+              "      <td>361.70</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div>\n",
+              "    <div class=\"colab-df-buttons\">\n",
+              "\n",
+              "  <div class=\"colab-df-container\">\n",
+              "    <button class=\"colab-df-convert\" onclick=\"convertToInteractive('df-a8758b3a-e183-4dd5-9b07-d81c3007a214')\"\n",
+              "            title=\"Convert this dataframe to an interactive table.\"\n",
+              "            style=\"display:none;\">\n",
+              "\n",
+              "  <svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\" viewBox=\"0 -960 960 960\">\n",
+              "    <path d=\"M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z\"/>\n",
+              "  </svg>\n",
+              "    </button>\n",
+              "\n",
+              "  <style>\n",
+              "    .colab-df-container {\n",
+              "      display:flex;\n",
+              "      gap: 12px;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-convert {\n",
+              "      background-color: #E8F0FE;\n",
+              "      border: none;\n",
+              "      border-radius: 50%;\n",
+              "      cursor: pointer;\n",
+              "      display: none;\n",
+              "      fill: #1967D2;\n",
+              "      height: 32px;\n",
+              "      padding: 0 0 0 0;\n",
+              "      width: 32px;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-convert:hover {\n",
+              "      background-color: #E2EBFA;\n",
+              "      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n",
+              "      fill: #174EA6;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-buttons div {\n",
+              "      margin-bottom: 4px;\n",
+              "    }\n",
+              "\n",
+              "    [theme=dark] .colab-df-convert {\n",
+              "      background-color: #3B4455;\n",
+              "      fill: #D2E3FC;\n",
+              "    }\n",
+              "\n",
+              "    [theme=dark] .colab-df-convert:hover {\n",
+              "      background-color: #434B5C;\n",
+              "      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n",
+              "      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n",
+              "      fill: #FFFFFF;\n",
+              "    }\n",
+              "  </style>\n",
+              "\n",
+              "    <script>\n",
+              "      const buttonEl =\n",
+              "        document.querySelector('#df-a8758b3a-e183-4dd5-9b07-d81c3007a214 button.colab-df-convert');\n",
+              "      buttonEl.style.display =\n",
+              "        google.colab.kernel.accessAllowed ? 'block' : 'none';\n",
+              "\n",
+              "      async function convertToInteractive(key) {\n",
+              "        const element = document.querySelector('#df-a8758b3a-e183-4dd5-9b07-d81c3007a214');\n",
+              "        const dataTable =\n",
+              "          await google.colab.kernel.invokeFunction('convertToInteractive',\n",
+              "                                                    [key], {});\n",
+              "        if (!dataTable) return;\n",
+              "\n",
+              "        const docLinkHtml = 'Like what you see? Visit the ' +\n",
+              "          '<a target=\"_blank\" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'\n",
+              "          + ' to learn more about interactive tables.';\n",
+              "        element.innerHTML = '';\n",
+              "        dataTable['output_type'] = 'display_data';\n",
+              "        await google.colab.output.renderOutput(dataTable, element);\n",
+              "        const docLink = document.createElement('div');\n",
+              "        docLink.innerHTML = docLinkHtml;\n",
+              "        element.appendChild(docLink);\n",
+              "      }\n",
+              "    </script>\n",
+              "  </div>\n",
+              "\n",
+              "\n",
+              "    </div>\n",
+              "  </div>\n"
+            ],
+            "application/vnd.google.colaboratory.intrinsic+json": {
+              "type": "dataframe",
+              "variable_name": "eksik_veri_satirlari",
+              "repr_error": "0"
+            }
+          },
+          "metadata": {},
+          "execution_count": 16
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#  6.indirim_orani ve musteri_puani sütunlarındaki eksik değerleri medyan ile doldurun.\n",
+        "#  Doldurmadan önce ve sonra bu iki sütundaki eksik değer sayılarını karşılaştırın.\n",
+        "\n",
+        "indirim_orani_eksik_deger_sayisi = df['indirim_orani'].isnull().sum()\n",
+        "indirim_orani_eksik_deger_sayisi"
+      ],
+      "metadata": {
+        "id": "OhRZYb1Omf58",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "5ceccaef-e7f2-4c1d-b745-f866d2c6d18e"
+      },
+      "execution_count": 17,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "np.int64(16)"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 17
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "musteri_puani_eksik_deger_sayisi=df[\"musteri_puani\"].isnull().sum()\n",
+        "musteri_puani_eksik_deger_sayisi"
+      ],
+      "metadata": {
+        "id": "Ehka9AWWoVQk",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "3d7b6de9-6280-41da-f516-851416f55579"
+      },
+      "execution_count": 18,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "np.int64(56)"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 18
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df[\"indirim_orani\"]=df[\"indirim_orani\"].fillna(df[\"indirim_orani\"].median)\n",
+        "df[\"musteri_puani\"]=df[\"musteri_puani\"].fillna(df[\"musteri_puani\"].median)"
+      ],
+      "metadata": {
+        "id": "DIsJnIFgog3E"
+      },
+      "execution_count": 19,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "indirim_orani_eksik_deger_sayisi=df[\"indirim_orani\"].isnull().sum()\n",
+        "indirim_orani_eksik_deger_sayisi"
+      ],
+      "metadata": {
+        "id": "QfSu1Qebpd_j",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "fe05aa87-4e65-4af1-aefb-0e5f47c45e40"
+      },
+      "execution_count": 20,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "np.int64(0)"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 20
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "musteri_puani_eksik_deger_sayisi=df[\"musteri_puani\"].isnull().sum()\n",
+        "musteri_puani_eksik_deger_sayisi"
+      ],
+      "metadata": {
+        "id": "K44f6UpFptlr",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "dd45b8ee-2f8c-4974-932f-16abe9be5c91"
+      },
+      "execution_count": 21,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "np.int64(0)"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 21
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# 7.\todeme_turu ve musteri_tipi sütunlarındaki eksik değerleri mod ile doldurun.\n",
+        "# Daha sonra bu sütunlarda eksik değer kalıp kalmadığını kontrol edin.\n",
+        "df[\"odeme_turu\"]=df[\"odeme_turu\"].fillna(df[\"odeme_turu\"].mode)\n",
+        "odeme_turu_eksik_deger_sayisi=df[\"odeme_turu\"].isnull().sum()\n",
+        "odeme_turu_eksik_deger_sayisi"
+      ],
+      "metadata": {
+        "id": "jL6NVC2Hp4z7",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "15596b20-7b67-4204-8574-0b059a8566f9"
+      },
+      "execution_count": 22,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "np.int64(0)"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 22
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df[\"musteri_tipi\"]=df[\"musteri_tipi\"].fillna(df[\"musteri_tipi\"].mode)\n",
+        "musteri_tipi_eksik_deger_sayisi=df[\"musteri_tipi\"].isnull().sum()\n",
+        "musteri_tipi_eksik_deger_sayisi"
+      ],
+      "metadata": {
+        "id": "zWdKz8B0q30r",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "db14635a-683c-40ff-b03d-c2caf04a28a7"
+      },
+      "execution_count": 23,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "np.int64(0)"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 23
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# 8.siparis_tarihi sütununu datetime tipine dönüştürün.\n",
+        "#Ardından bu sütundan siparis_yili, siparis_ayi, siparis_gunu ve haftanin_gunu adında 4 yeni sütun üretin ve ilk 10 satırını gösterin.\n",
+        "df[\"siparis_tarihi\"]=pd.to_datetime(df[\"siparis_tarihi\"])\n",
+        "df[\"siparis_tarihi\"].dtype"
+      ],
+      "metadata": {
+        "id": "SBVlQurZrbDT",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "98df720b-5cd2-44dd-f1e6-04e4202459f2"
+      },
+      "execution_count": 24,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "dtype('<M8[ns]')"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 24
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df[\"siparis_yili\"]=df[\"siparis_tarihi\"].dt.year\n",
+        "df[\"siparis_ayi\"]=df[\"siparis_tarihi\"].dt.month\n",
+        "df[\"siparis_gunu\"]=df[\"siparis_tarihi\"].dt.day\n",
+        "df[\"haftanin_gunu\"]=df[\"siparis_tarihi\"].dt.day_name()\n",
+        "df[[\"siparis_yili\",\"siparis_ayi\",\"siparis_gunu\",\"haftanin_gunu\"]]"
+      ],
+      "metadata": {
+        "id": "ssvXHTf3tNKi",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 423
+        },
+        "outputId": "322c695b-3aa1-494e-b8ce-ef216835a435"
+      },
+      "execution_count": 25,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "      siparis_yili  siparis_ayi  siparis_gunu haftanin_gunu\n",
+              "0             2024            1            13      Saturday\n",
+              "1             2025            3            17        Monday\n",
+              "2             2025            6             3       Tuesday\n",
+              "3             2024            8            10      Saturday\n",
+              "4             2024            8            19        Monday\n",
+              "...            ...          ...           ...           ...\n",
+              "1423          2024            6             8      Saturday\n",
+              "1424          2025           11             6      Thursday\n",
+              "1425          2025            3             7        Friday\n",
+              "1426          2025            4            19      Saturday\n",
+              "1427          2024            9            22        Sunday\n",
+              "\n",
+              "[1428 rows x 4 columns]"
+            ],
+            "text/html": [
+              "\n",
+              "  <div id=\"df-1e0b9c0e-2cca-49f6-bf56-7ffe7701eeee\" class=\"colab-df-container\">\n",
+              "    <div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>siparis_yili</th>\n",
+              "      <th>siparis_ayi</th>\n",
+              "      <th>siparis_gunu</th>\n",
+              "      <th>haftanin_gunu</th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>0</th>\n",
+              "      <td>2024</td>\n",
+              "      <td>1</td>\n",
+              "      <td>13</td>\n",
+              "      <td>Saturday</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1</th>\n",
+              "      <td>2025</td>\n",
+              "      <td>3</td>\n",
+              "      <td>17</td>\n",
+              "      <td>Monday</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>2</th>\n",
+              "      <td>2025</td>\n",
+              "      <td>6</td>\n",
+              "      <td>3</td>\n",
+              "      <td>Tuesday</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>3</th>\n",
+              "      <td>2024</td>\n",
+              "      <td>8</td>\n",
+              "      <td>10</td>\n",
+              "      <td>Saturday</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>4</th>\n",
+              "      <td>2024</td>\n",
+              "      <td>8</td>\n",
+              "      <td>19</td>\n",
+              "      <td>Monday</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>...</th>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "      <td>...</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1423</th>\n",
+              "      <td>2024</td>\n",
+              "      <td>6</td>\n",
+              "      <td>8</td>\n",
+              "      <td>Saturday</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1424</th>\n",
+              "      <td>2025</td>\n",
+              "      <td>11</td>\n",
+              "      <td>6</td>\n",
+              "      <td>Thursday</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1425</th>\n",
+              "      <td>2025</td>\n",
+              "      <td>3</td>\n",
+              "      <td>7</td>\n",
+              "      <td>Friday</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1426</th>\n",
+              "      <td>2025</td>\n",
+              "      <td>4</td>\n",
+              "      <td>19</td>\n",
+              "      <td>Saturday</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>1427</th>\n",
+              "      <td>2024</td>\n",
+              "      <td>9</td>\n",
+              "      <td>22</td>\n",
+              "      <td>Sunday</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "<p>1428 rows × 4 columns</p>\n",
+              "</div>\n",
+              "    <div class=\"colab-df-buttons\">\n",
+              "\n",
+              "  <div class=\"colab-df-container\">\n",
+              "    <button class=\"colab-df-convert\" onclick=\"convertToInteractive('df-1e0b9c0e-2cca-49f6-bf56-7ffe7701eeee')\"\n",
+              "            title=\"Convert this dataframe to an interactive table.\"\n",
+              "            style=\"display:none;\">\n",
+              "\n",
+              "  <svg xmlns=\"http://www.w3.org/2000/svg\" height=\"24px\" viewBox=\"0 -960 960 960\">\n",
+              "    <path d=\"M120-120v-720h720v720H120Zm60-500h600v-160H180v160Zm220 220h160v-160H400v160Zm0 220h160v-160H400v160ZM180-400h160v-160H180v160Zm440 0h160v-160H620v160ZM180-180h160v-160H180v160Zm440 0h160v-160H620v160Z\"/>\n",
+              "  </svg>\n",
+              "    </button>\n",
+              "\n",
+              "  <style>\n",
+              "    .colab-df-container {\n",
+              "      display:flex;\n",
+              "      gap: 12px;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-convert {\n",
+              "      background-color: #E8F0FE;\n",
+              "      border: none;\n",
+              "      border-radius: 50%;\n",
+              "      cursor: pointer;\n",
+              "      display: none;\n",
+              "      fill: #1967D2;\n",
+              "      height: 32px;\n",
+              "      padding: 0 0 0 0;\n",
+              "      width: 32px;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-convert:hover {\n",
+              "      background-color: #E2EBFA;\n",
+              "      box-shadow: 0px 1px 2px rgba(60, 64, 67, 0.3), 0px 1px 3px 1px rgba(60, 64, 67, 0.15);\n",
+              "      fill: #174EA6;\n",
+              "    }\n",
+              "\n",
+              "    .colab-df-buttons div {\n",
+              "      margin-bottom: 4px;\n",
+              "    }\n",
+              "\n",
+              "    [theme=dark] .colab-df-convert {\n",
+              "      background-color: #3B4455;\n",
+              "      fill: #D2E3FC;\n",
+              "    }\n",
+              "\n",
+              "    [theme=dark] .colab-df-convert:hover {\n",
+              "      background-color: #434B5C;\n",
+              "      box-shadow: 0px 1px 3px 1px rgba(0, 0, 0, 0.15);\n",
+              "      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.3));\n",
+              "      fill: #FFFFFF;\n",
+              "    }\n",
+              "  </style>\n",
+              "\n",
+              "    <script>\n",
+              "      const buttonEl =\n",
+              "        document.querySelector('#df-1e0b9c0e-2cca-49f6-bf56-7ffe7701eeee button.colab-df-convert');\n",
+              "      buttonEl.style.display =\n",
+              "        google.colab.kernel.accessAllowed ? 'block' : 'none';\n",
+              "\n",
+              "      async function convertToInteractive(key) {\n",
+              "        const element = document.querySelector('#df-1e0b9c0e-2cca-49f6-bf56-7ffe7701eeee');\n",
+              "        const dataTable =\n",
+              "          await google.colab.kernel.invokeFunction('convertToInteractive',\n",
+              "                                                    [key], {});\n",
+              "        if (!dataTable) return;\n",
+              "\n",
+              "        const docLinkHtml = 'Like what you see? Visit the ' +\n",
+              "          '<a target=\"_blank\" href=https://colab.research.google.com/notebooks/data_table.ipynb>data table notebook</a>'\n",
+              "          + ' to learn more about interactive tables.';\n",
+              "        element.innerHTML = '';\n",
+              "        dataTable['output_type'] = 'display_data';\n",
+              "        await google.colab.output.renderOutput(dataTable, element);\n",
+              "        const docLink = document.createElement('div');\n",
+              "        docLink.innerHTML = docLinkHtml;\n",
+              "        element.appendChild(docLink);\n",
+              "      }\n",
+              "    </script>\n",
+              "  </div>\n",
+              "\n",
+              "\n",
+              "    </div>\n",
+              "  </div>\n"
+            ],
+            "application/vnd.google.colaboratory.intrinsic+json": {
+              "type": "dataframe",
+              "summary": "{\n  \"name\": \"df[[\\\"siparis_yili\\\",\\\"siparis_ayi\\\",\\\"siparis_gunu\\\",\\\"haftanin_gunu\\\"]]\",\n  \"rows\": 1428,\n  \"fields\": [\n    {\n      \"column\": \"siparis_yili\",\n      \"properties\": {\n        \"dtype\": \"int32\",\n        \"num_unique_values\": 2,\n        \"samples\": [\n          2025,\n          2024\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"siparis_ayi\",\n      \"properties\": {\n        \"dtype\": \"int32\",\n        \"num_unique_values\": 12,\n        \"samples\": [\n          11,\n          9\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"siparis_gunu\",\n      \"properties\": {\n        \"dtype\": \"int32\",\n        \"num_unique_values\": 31,\n        \"samples\": [\n          18,\n          8\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    },\n    {\n      \"column\": \"haftanin_gunu\",\n      \"properties\": {\n        \"dtype\": \"category\",\n        \"num_unique_values\": 7,\n        \"samples\": [\n          \"Saturday\",\n          \"Monday\"\n        ],\n        \"semantic_type\": \"\",\n        \"description\": \"\"\n      }\n    }\n  ]\n}"
+            }
+          },
+          "metadata": {},
+          "execution_count": 25
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# 9.\tVeri setindeki duplicate kayıt sayısını bulun.\n",
+        "#Duplicate kayıtları temizleyin ve temizlikten önce ve sonra veri setinin satır sayısını yazdırın.\n",
+        "df.shape"
+      ],
+      "metadata": {
+        "id": "fVDQ3uGgvTXp",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "b5bdb865-c85c-495a-f63b-af62ef4c26cf"
+      },
+      "execution_count": 26,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "(1428, 22)"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 26
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "tekrarlayan_kayitlar=df[df.duplicated()]\n",
+        "len(tekrarlayan_kayitlar)"
+      ],
+      "metadata": {
+        "id": "MwJVg5eD1o-X",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "bedd9658-78fa-4c0a-a9c4-63a216305bd8"
+      },
+      "execution_count": 27,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "28"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 27
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df=df.drop_duplicates()\n",
+        "df.shape"
+      ],
+      "metadata": {
+        "id": "mV8BOZF35Ty1",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "3812a3ed-9dd6-4418-81d8-a36a61ab70b8"
+      },
+      "execution_count": 28,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "(1400, 22)"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 28
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# 10.\tsehir sütunundaki benzersiz değerleri inceleyin. İstanbul, istanbul, Istanbul gibi aynı anlama gelen farklı yazımları tek bir standart biçime dönüştürün.\n",
+        "#Temizlikten önce ve sonra benzersiz değer sayılarını karşılaştırın.\n",
+        "df[\"sehir\"].unique()"
+      ],
+      "metadata": {
+        "id": "QrL7cE7w6BBe",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "6d6e9a30-f227-4eaf-ab46-06581a83feef"
+      },
+      "execution_count": 29,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array(['İstanbul', 'Gaziantep', 'Kayseri', 'Antalya', 'Konya', 'Ankara',\n",
+              "       'Bursa', 'Trabzon', 'Adana', 'Mersin', 'Kocaeli', 'İzmir',\n",
+              "       'Eskişehir', 'Samsun', nan, 'istanbul', 'ankara', 'Istanbul',\n",
+              "       'gaziantep', 'Izmir'], dtype=object)"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 29
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df[\"sehir\"].nunique()"
+      ],
+      "metadata": {
+        "id": "4zTRpmjeF_oZ",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "43978e51-9c43-4411-bdf4-ed53534feac6"
+      },
+      "execution_count": 30,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "19"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 30
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def metin_normalizasyonu(series):\n",
+        "\n",
+        "  return(\n",
+        "      series.astype(str)\n",
+        "      .str.strip()\n",
+        "      .str.lower()\n",
+        "      .str.replace(\"i̇\",\"i\", regex=False)\n",
+        "      .str.replace(\"ı\",\"i\", regex=False)\n",
+        "      .str.replace(\"ö\",\"o\", regex=False)\n",
+        "      .str.replace(\"ü\",\"u\", regex=False)\n",
+        "      .str.replace(\"ç\",\"c\", regex=False)\n",
+        "      .str.replace(\"ğ\",\"g\", regex=False)\n",
+        "      .str.replace(\"ş\",\"s\", regex=False)\n",
+        "  )"
+      ],
+      "metadata": {
+        "id": "AReYyTJ66WyN"
+      },
+      "execution_count": 31,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df[\"sehir\"]=metin_normalizasyonu(df[\"sehir\"])\n",
+        "df[\"sehir\"].unique()"
+      ],
+      "metadata": {
+        "id": "Fmb3hThlFoZ6",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "e1c3fffb-8905-4c42-82dd-9c4a23eb7b5e"
+      },
+      "execution_count": 32,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array(['istanbul', 'gaziantep', 'kayseri', 'antalya', 'konya', 'ankara',\n",
+              "       'bursa', 'trabzon', 'adana', 'mersin', 'kocaeli', 'izmir',\n",
+              "       'eskisehir', 'samsun', 'nan'], dtype=object)"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 32
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df[\"sehir\"].nunique()"
+      ],
+      "metadata": {
+        "id": "BXxDQH-1FvjB",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "beb3093b-ffcb-45f4-dbdb-041ed744b11c"
+      },
+      "execution_count": 33,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "15"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 33
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#11.kategori sütunundaki tutarsız değerleri inceleyin.\n",
+        "# Örneğin Ev Yaşam, ev yaşam, ev&yaşam gibi farklı yazımları tek biçime dönüştürün. Temizlikten sonra value_counts() çıktısını yazdırın.\n",
+        "df[\"kategori\"].unique()\n"
+      ],
+      "metadata": {
+        "id": "gEZtxrStND3u",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "18104f23-7c1f-4654-eae4-976e653251af"
+      },
+      "execution_count": 34,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array(['Kozmetik', 'Spor', 'Kitap', 'Elektronik', 'Ofis', 'ofis',\n",
+              "       'Ev ve Yaşam', 'Elektronik ', 'spor', 'kozmetık', 'ev ve yaşam',\n",
+              "       'kitap', 'Kozmetik ', 'elektronik', 'Ev&Yaşam'], dtype=object)"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 34
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df[\"kategori\"]=metin_normalizasyonu(df[\"kategori\"])\n",
+        "df[\"kategori\"].unique()"
+      ],
+      "metadata": {
+        "id": "sCaQQUzmQqjt",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "130fad47-a82e-43d3-e49a-e391efc8c74c"
+      },
+      "execution_count": 35,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "array(['kozmetik', 'spor', 'kitap', 'elektronik', 'ofis', 'ev ve yasam',\n",
+              "       'ev&yasam'], dtype=object)"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 35
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "kategori_duzeltme = {\n",
+        "    \"kozmetik\":\"Kozmetik\",\n",
+        "    \"spor\":\"Spor\",\n",
+        "    \"kitap\":\"Kitap\",\n",
+        "    \"elektronik\":\"Elektronik\",\n",
+        "    \"ofis\":\"Ofis\",\n",
+        "    \"ev ve yasam\":\"Ev Yasam\",\n",
+        "    \"ev&yasam\":\"Ev Yasam\"\n",
+        "}"
+      ],
+      "metadata": {
+        "id": "75psuP1GRCcl"
+      },
+      "execution_count": 36,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df[\"kategori\"]=df[\"kategori\"].replace(kategori_duzeltme)"
+      ],
+      "metadata": {
+        "id": "HqSDA0vJSIT9"
+      },
+      "execution_count": 37,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df[\"kategori\"].value_counts()"
+      ],
+      "metadata": {
+        "id": "anCGnn1ISdHU",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 303
+        },
+        "outputId": "5b09d23b-125c-40c7-fc8b-11ab71b35ca3"
+      },
+      "execution_count": 38,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "kategori\n",
+              "Kitap         253\n",
+              "Elektronik    241\n",
+              "Spor          235\n",
+              "Ofis          230\n",
+              "Kozmetik      225\n",
+              "Ev Yasam      216\n",
+              "Name: count, dtype: int64"
+            ],
+            "text/html": [
+              "<div>\n",
+              "<style scoped>\n",
+              "    .dataframe tbody tr th:only-of-type {\n",
+              "        vertical-align: middle;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe tbody tr th {\n",
+              "        vertical-align: top;\n",
+              "    }\n",
+              "\n",
+              "    .dataframe thead th {\n",
+              "        text-align: right;\n",
+              "    }\n",
+              "</style>\n",
+              "<table border=\"1\" class=\"dataframe\">\n",
+              "  <thead>\n",
+              "    <tr style=\"text-align: right;\">\n",
+              "      <th></th>\n",
+              "      <th>count</th>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>kategori</th>\n",
+              "      <th></th>\n",
+              "    </tr>\n",
+              "  </thead>\n",
+              "  <tbody>\n",
+              "    <tr>\n",
+              "      <th>Kitap</th>\n",
+              "      <td>253</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>Elektronik</th>\n",
+              "      <td>241</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>Spor</th>\n",
+              "      <td>235</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>Ofis</th>\n",
+              "      <td>230</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>Kozmetik</th>\n",
+              "      <td>225</td>\n",
+              "    </tr>\n",
+              "    <tr>\n",
+              "      <th>Ev Yasam</th>\n",
+              "      <td>216</td>\n",
+              "    </tr>\n",
+              "  </tbody>\n",
+              "</table>\n",
+              "</div><br><label><b>dtype:</b> int64</label>"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 38
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df.columns"
+      ],
+      "metadata": {
+        "id": "00R9p8UbSnqM",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "21b0c139-a2f4-40e1-8d45-88a80e9dd5f8"
+      },
+      "execution_count": 39,
+      "outputs": [
+        {
+          "output_type": "execute_result",
+          "data": {
+            "text/plain": [
+              "Index(['siparis_id', 'musteri_id', 'siparis_tarihi', 'sehir', 'bolge',\n",
+              "       'kategori', 'urun_adi', 'adet', 'birim_fiyat', 'indirim_orani',\n",
+              "       'kargo_ucreti', 'odeme_turu', 'musteri_tipi', 'teslimat_gunu',\n",
+              "       'musteri_puani', 'iade_durumu', 'kar_marji_orani', 'toplam_tutar',\n",
+              "       'siparis_yili', 'siparis_ayi', 'siparis_gunu', 'haftanin_gunu'],\n",
+              "      dtype='object')"
+            ]
+          },
+          "metadata": {},
+          "execution_count": 39
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#12.\tAşağıdaki koşullara uyan mantıksal olarak hatalı kayıtları bulun: birim_fiyat <= 0, toplam_tutar <= 0, teslimat_gunu < 0, musteri_puani > 5.\n",
+        "#bu kayıtların sayısını yazdırın ve veri setinden çıkarın.\n",
+        "hatali_kayitlar = df[\n",
+        "    (df[\"birim_fiyat\"]<=0) |\n",
+        "    (df[\"toplam_tutar\"]<=0) |\n",
+        "    (df[\"teslimat_gunu\"] <0) |\n",
+        "    (df[ \"musteri_puani\"] > 5) |\n",
+        "    (df[\"musteri_puani\"] < 0)\n",
+        " ]\n"
+      ],
+      "metadata": {
+        "id": "FDpWzQ8kW3zq"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df.dtypes"
+      ],
+      "metadata": {
+        "id": "v31HGIiRYo66"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#müşteri puanı object olarak kalmış\n",
+        "df[\"musteri_puani\"] = pd.to_numeric(df[\"musteri_puani\"], errors=\"coerce\")\n",
+        "df[\"musteri_puani\"].dtype\n"
+      ],
+      "metadata": {
+        "id": "tFeQi5ojY5wC"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#12.\tAşağıdaki koşullara uyan mantıksal olarak hatalı kayıtları bulun: birim_fiyat <= 0, toplam_tutar <= 0, teslimat_gunu < 0, musteri_puani > 5.\n",
+        "#bu kayıtların sayısını yazdırın ve veri setinden çıkarın.\n",
+        "hatali_kayitlar = df[\n",
+        "    (df[\"birim_fiyat\"]<=0) |\n",
+        "    (df[\"toplam_tutar\"]<=0) |\n",
+        "    (df[\"teslimat_gunu\"] <0) |\n",
+        "    (df[ \"musteri_puani\"] > 5) |\n",
+        "    (df[\"musteri_puani\"] < 0)\n",
+        " ]\n",
+        "hatali_kayitlar"
+      ],
+      "metadata": {
+        "id": "tZI9C9npZ7NM"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "len(hatali_kayitlar)"
+      ],
+      "metadata": {
+        "id": "da2iye-WaUvK"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df = df[\n",
+        "    (df[\"birim_fiyat\"]>0) &\n",
+        "    (df[\"toplam_tutar\"]>0) &\n",
+        "    (df[\"teslimat_gunu\"] >=0) &\n",
+        "    (df[ \"musteri_puani\"] <= 5) &\n",
+        "    (df[\"musteri_puani\"] >= 0)\n",
+        "]\n",
+        "df.shape"
+      ],
+      "metadata": {
+        "id": "G-LTqg3kbWUB"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#13.\tbirim_fiyat sütunu için IQR yöntemini kullanarak Q1, Q3, IQR, alt sınır ve üst sınır değerlerini hesaplayın.\n",
+        "#Sonra aykırı değer içeren kayıt sayısını yazdırın.\n",
+        "q1 = df[\"birim_fiyat\"].quantile(0.25)\n",
+        "q3 = df[\"birim_fiyat\"].quantile(0.75)\n",
+        "iqr= q3 - q1\n",
+        "birim_fiyat_alt_sinir = q1- 1.5*iqr\n",
+        "birim_fiyat_ust_sinir = q3 + 1.5*iqr\n",
+        "birim_fiyat_alt_sinir"
+      ],
+      "metadata": {
+        "id": "MdZkssTPdqYw"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "birim_fiyat_ust_sinir"
+      ],
+      "metadata": {
+        "id": "R7PdOXyVo2YU"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "birim_fiyat_aykiri_degerler = df[(df[\"birim_fiyat\"]< birim_fiyat_alt_sinir) | (df[\"birim_fiyat\"] > birim_fiyat_ust_sinir)]\n",
+        "len(birim_fiyat_aykiri_degerler)\n"
+      ],
+      "metadata": {
+        "id": "TxjsJWGZnw0N"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#14.toplam_tutar sütunu için histogram çizdirin ve box plot çizdirin. Ardından dağılım hakkında 2–3 cümlelik kısa bir yorum yazın.\n",
+        "import matplotlib.pyplot as plt\n",
+        "import seaborn as sns"
+      ],
+      "metadata": {
+        "id": "DLG7oNgbpVxc"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df=pd.read_csv(\"e_ticaret_veri_seti_aykiri_degerler_duzenlendi.csv\")"
+      ],
+      "metadata": {
+        "id": "phhtdiL3p2aE"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        " plt.hist(df[\"toplam_tutar\"], bins = 120)\n",
+        " plt.title(f\"{\"toplam_tutar\"} sütunu için histogram\")\n",
+        " plt.xlabel(\"Toplam Tutar\")\n",
+        " plt.ylabel(\"Frekans\")\n",
+        " plt.tight_layout()\n",
+        " plt.show()"
+      ],
+      "metadata": {
+        "id": "uUiQ01QMqFQ_"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "#Toplam tutar arttıkça satış da azalmış yani çoğunluğun bütçesi 0-1500 bandında.\n",
+        "#2500-3000 bandındaki değerler sütunun ortalamasını gereksiz yükseltiyor olabilir. Bunlara outlier diyebiliriz.\n",
+        "#muhtemelen alt sınır eksilerde."
+      ],
+      "metadata": {
+        "id": "ULFSh9FRrzRc"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "15.\tAşağıdaki analizleri yapın: kategori sütunu için value_counts() çıktısını yazdırın, musteri_tipi sütunu için yüzde dağılımı hesaplayın, odeme_turu sütunu için count plot çizdirin, birim_fiyat, toplam_tutar ve musteri_puani sütunlarının temel istatistiklerini çıkarın. Son olarak şu iki soruya cevap verin: Hangi kategori en yüksek ortalama toplam_tutar değerine sahip? Hangi müşteri tipi en yüksek ortalama musteri_puani değerine sahip?"
+      ],
+      "metadata": {
+        "id": "EhjBVUiatE9O"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "df[\"kategori\"].value_counts()"
+      ],
+      "metadata": {
+        "id": "dDLtPf6NtJMq"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print((df[\"musteri_tipi\"].value_counts(normalize=True) * 100).round(2))"
+      ],
+      "metadata": {
+        "id": "etAqo2tXtcgL"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "plt.figure(figsize=(6,4))\n",
+        "sns.countplot(data=df, x=\"odeme_turu\", order=df[\"odeme_turu\"].value_counts().index)\n",
+        "plt.title(\"Ödeme Türü Dağılımı\")\n",
+        "plt.xticks(rotation=45)\n",
+        "plt.show()"
+      ],
+      "metadata": {
+        "id": "91rgx_nhv2dy"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "print(df[[\"birim_fiyat\", \"toplam_tutar\", \"musteri_puani\"]].describe())"
+      ],
+      "metadata": {
+        "id": "AD4D4kbpwMnC"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "kategori_ortalama = df.groupby(\"kategori\")[\"toplam_tutar\"].mean().sort_values(ascending=False)\n",
+        "\n",
+        "print(kategori_ortalama)\n",
+        "print(\"En yüksek kategori:\", kategori_ortalama.idxmax())            #Elektronik"
+      ],
+      "metadata": {
+        "id": "8x_u8vymwQix"
+      },
+      "execution_count": null,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "musteri_ortalama = df.groupby(\"musteri_tipi\")[\"musteri_puani\"].mean().sort_values(ascending=False)\n",
+        "\n",
+        "print(musteri_ortalama)\n",
+        "print(\"En yüksek müşteri tipi:\", musteri_ortalama.idxmax())   #mevcut"
+      ],
+      "metadata": {
+        "id": "VBo7vsY3wiLi"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
